@@ -642,7 +642,7 @@ public class Main extends javax.swing.JFrame {
     private void bt_Modificar_DesarolladorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Modificar_DesarolladorMouseClicked
         // TODO add your handling code here:
         String input;
-        input = JOptionPane.showInputDialog(jd_CRUD_Desarollador, "1. Asignar Bug\n2. Agregar Tecnologia\n3. Agregar Lenguaje\n4. Modificar Codigo\n Ingrese una opcion: ");
+        input = JOptionPane.showInputDialog(jd_CRUD_Desarollador, "1. Asignar Bug\n2. Agregar Tecnologia\n3. Agregar Lenguaje\n Ingrese una opcion: ");
         switch (input) {
             case "1": {
                 String desa;
@@ -690,21 +690,6 @@ public class Main extends javax.swing.JFrame {
                 }
             }
             break;
-            case "4":{
-                 String desa;
-                String asignar;
-                desa = JOptionPane.showInputDialog(jd_CRUD_Desarollador, "Ingrese el codigo del desarollador a agregar ellenguaje: ");
-
-                asignar = JOptionPane.showInputDialog(jd_CRUD_Desarollador, "Ingrese el nuevo codigo: ");
-
-                for (int i = 0; i < desarolladores.size(); i++) {
-                    if (desarolladores.get(i).getCodigo_D() == Integer.parseInt(desa)) {
-                        desarolladores.get(i).setCodigo_D(Integer.parseInt(asignar));
-                    }
-                }
-            
-                break;}
-
             default:
                 JOptionPane.showMessageDialog(jd_CRUD_Desarollador, "Opcion no valida");
 
