@@ -6,20 +6,24 @@
 package proyecto_tb2;
 
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
  * @author HP
  */
 public class Main extends javax.swing.JFrame {
-
+    
     Connection con = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -30,7 +34,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH / 2);
-
+        
     }
 
     /**
@@ -46,6 +50,8 @@ public class Main extends javax.swing.JFrame {
         bt_CRUD_Software = new javax.swing.JButton();
         bt_CRUD_Desarollador = new javax.swing.JButton();
         bt_Salir_Admins = new javax.swing.JButton();
+        bt_Grafica_Circular = new javax.swing.JButton();
+        bt_Bug_Admin = new javax.swing.JButton();
         jd_CRUD_Software = new javax.swing.JDialog();
         jtf_Codigo_Proyecto = new javax.swing.JTextField();
         jtf_Nombre_Proyecto = new javax.swing.JTextField();
@@ -128,23 +134,40 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        bt_Grafica_Circular.setText("Grafica Cricular");
+        bt_Grafica_Circular.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_Grafica_CircularMouseClicked(evt);
+            }
+        });
+
+        bt_Bug_Admin.setText("Bug");
+
         javax.swing.GroupLayout jd_AdministradoresLayout = new javax.swing.GroupLayout(jd_Administradores.getContentPane());
         jd_Administradores.getContentPane().setLayout(jd_AdministradoresLayout);
         jd_AdministradoresLayout.setHorizontalGroup(
             jd_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_AdministradoresLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addComponent(bt_CRUD_Software)
-                .addGap(18, 18, 18)
-                .addComponent(bt_CRUD_Desarollador)
-                .addGap(18, 18, 18)
-                .addComponent(bt_Salir_Admins)
+                .addGroup(jd_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bt_Bug_Admin)
+                    .addComponent(bt_Grafica_Circular)
+                    .addGroup(jd_AdministradoresLayout.createSequentialGroup()
+                        .addComponent(bt_CRUD_Software)
+                        .addGap(18, 18, 18)
+                        .addComponent(bt_CRUD_Desarollador)
+                        .addGap(18, 18, 18)
+                        .addComponent(bt_Salir_Admins)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jd_AdministradoresLayout.setVerticalGroup(
             jd_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_AdministradoresLayout.createSequentialGroup()
-                .addContainerGap(232, Short.MAX_VALUE)
+                .addGap(63, 63, 63)
+                .addComponent(bt_Grafica_Circular)
+                .addGap(18, 18, 18)
+                .addComponent(bt_Bug_Admin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addGroup(jd_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_CRUD_Software)
                     .addComponent(bt_CRUD_Desarollador)
@@ -658,7 +681,7 @@ public class Main extends javax.swing.JFrame {
                 jd_Administradores.setLocationRelativeTo(this);
                 jd_Administradores.setVisible(true);
                 jd_Administradores.setSize(250, 250);
-
+                
             } else if (usuario.equalsIgnoreCase(users.get(i).getCredenciales()) && clave.equals(users.get(i).getClave()) && rol.equalsIgnoreCase("desarollador")) {
                 jtf_Roll.setText("");
                 jpf_Contraseña.setText("");
@@ -716,7 +739,7 @@ public class Main extends javax.swing.JFrame {
         jd_Ver_Desarollador.setLocationRelativeTo(this);
         jd_Ver_Desarollador.setVisible(true);
         jd_Ver_Desarollador.setSize(250, 250);
-
+        
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Codigo");
         model.addColumn("Nombre");
@@ -753,22 +776,22 @@ public class Main extends javax.swing.JFrame {
                     bug += "" + bugs.get(i).getCodigo() + "\n";
                 }
                 asignar = JOptionPane.showInputDialog(jd_Ver_Desarollador, bug + "\nIngrese un bug a asignar");
-
+                
                 for (int i = 0; i < desarolladores.size(); i++) {
                     if (desarolladores.get(i).getCodigo_D() == Integer.parseInt(desa)) {
                         desarolladores.get(i).setReparar(bugs.get(Integer.parseInt(asignar)));
                     }
                 }
-
+                
                 break;
             }
             case "2": {
                 String desa;
                 String asignar;
                 desa = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el codigo del desarollador a agregar la tecnologia: ");
-
+                
                 asignar = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese la tecnologia a agregar: ");
-
+                
                 for (int i = 0; i < desarolladores.size(); i++) {
                     if (desarolladores.get(i).getCodigo_D() == Integer.parseInt(desa)) {
                         desarolladores.get(i).addTecnologia(asignar);
@@ -780,9 +803,9 @@ public class Main extends javax.swing.JFrame {
                 String desa;
                 String asignar;
                 desa = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el codigo del desarollador a agregar ellenguaje: ");
-
+                
                 asignar = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el lenguaje a agregar: ");
-
+                
                 for (int i = 0; i < desarolladores.size(); i++) {
                     if (desarolladores.get(i).getCodigo_D() == Integer.parseInt(desa)) {
                         desarolladores.get(i).addLenguaje(asignar);
@@ -792,7 +815,7 @@ public class Main extends javax.swing.JFrame {
             break;
             default:
                 JOptionPane.showMessageDialog(jd_Ver_Desarollador, "Opcion no valida");
-
+            
         }//casos para las opciones para modificar el desarollador
     }//GEN-LAST:event_bt_Modificar_DesarolladorMouseClicked
 
@@ -806,11 +829,11 @@ public class Main extends javax.swing.JFrame {
     private void B_BugInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_BugInsertarActionPerformed
         try {
             String sql = "INSERT INTO BUG (CODIGO, DESCRIPCION, CODIGO_PROYECTO_SOFTWARE, NIVEL_URGENCIA, ESTADO, FECHAINICIO, FECHAFIN)VALUES (?,?,?,?,?,?,?)";
-
+            
             con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
-
+            
             pst = con.prepareStatement(sql);
-
+            
             pst.setString(1, text1.getText());
             pst.setString(2, text2.getText());
             pst.setString(3, text3.getText());
@@ -818,11 +841,11 @@ public class Main extends javax.swing.JFrame {
             pst.setString(5, text5.getText());
             pst.setString(6, text6.getText());
             pst.setString(7, text7.getText());
-
+            
             pst.executeUpdate();
-
+            
             JOptionPane.showMessageDialog(null, "success");
-
+            
             text1.setText("");
             text2.setText("");
             text3.setText("");
@@ -830,7 +853,7 @@ public class Main extends javax.swing.JFrame {
             text5.setText("");
             text6.setText("");
             text7.setText("");
-
+            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -877,16 +900,16 @@ public class Main extends javax.swing.JFrame {
                         softwares.get(i).setNombre_P(asignar);
                     }
                 }
-
+                
                 break;
             }
             case "2": {
                 String desa;
                 String asignar;
                 desa = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese el codigo del proyecto a cambiar la fecha de Inicio: ");
-
+                
                 asignar = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese nueva fecha inicio: ");
-
+                
                 for (int i = 0; i < softwares.size(); i++) {
                     if (softwares.get(i).getCodigo_P() == Integer.parseInt(desa)) {
                         softwares.get(i).setFecha_I(asignar);
@@ -898,9 +921,9 @@ public class Main extends javax.swing.JFrame {
                 String desa;
                 String asignar;
                 desa = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese el codigo del proyecto a cambiar la fecha de finalizacionn: ");
-
+                
                 asignar = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese nueva fecha finalizacion: ");
-
+                
                 for (int i = 0; i < softwares.size(); i++) {
                     if (softwares.get(i).getCodigo_P() == Integer.parseInt(desa)) {
                         softwares.get(i).setFecha_F(asignar);
@@ -909,7 +932,7 @@ public class Main extends javax.swing.JFrame {
             }
             break;
             case "4": {
-
+                
                 String desa;
                 String asignar;
                 desa = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el codigo del proyecto a asignar el desarollador: ");
@@ -918,17 +941,17 @@ public class Main extends javax.swing.JFrame {
                     desarollador += "" + desarolladores.get(i).getCodigo_D() + "\n";
                 }
                 asignar = JOptionPane.showInputDialog(jd_Ver_Desarollador, desarollador + "\nIngrese un desarollador a asignar");
-
+                
                 for (int i = 0; i < softwares.size(); i++) {
                     if (softwares.get(i).getCodigo_P() == Integer.parseInt(desa)) {
                         softwares.get(i).addDesarollador(desarolladores.get(Integer.parseInt(asignar)));
                     }
                 }
-
+                
                 break;
             }
             case "5": {
-
+                
                 String desa;
                 String asignar;
                 desa = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el codigo del proyecto a asignar el desarollador: ");
@@ -937,19 +960,48 @@ public class Main extends javax.swing.JFrame {
                     bug += "" + bugs.get(i).getCodigo() + "\n";
                 }
                 asignar = JOptionPane.showInputDialog(jd_Ver_Desarollador, bug + "\nIngrese un bug a asignar");
-
+                
                 for (int i = 0; i < softwares.size(); i++) {
                     if (softwares.get(i).getCodigo_P() == Integer.parseInt(desa)) {
                         softwares.get(i).addBugs(bugs.get(Integer.parseInt(asignar)));
                     }
                 }
-
+                
                 break;
             }
             default:
                 JOptionPane.showMessageDialog(jd_Ver_Projectos, "Opcion no valida");
         }
     }//GEN-LAST:event_bt_Modificar_ProyectoMouseClicked
+
+    private void bt_Grafica_CircularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Grafica_CircularMouseClicked
+        // TODO add your handling code here:
+        DefaultPieDataset datos = new DefaultPieDataset();
+        int asignados = 0;
+        int nuevos = 0;
+        int finalizados = 0;
+        for (int i = 0; i < bugs.size(); i++) {
+            bugs.get(i).getEstado();
+            if (bugs.get(i).getEstado().equalsIgnoreCase("nuevo")) {
+                nuevos++;
+            } else if (bugs.get(i).getEstado().equalsIgnoreCase("asignado")) {
+                asignados++;
+            } else if (bugs.get(i).getEstado().equalsIgnoreCase("finalizado")) {
+                finalizados++;
+            }
+        }
+        
+        datos.setValue("Nuevos", nuevos);
+        datos.setValue("Asignados", asignados);
+        datos.setValue("Finalizados", finalizados);
+        
+        JFreeChart chart = ChartFactory.createPieChart("Bugs", datos, true, true, true);
+        PiePlot p=(PiePlot)chart.getPlot();
+        //p.setForegroundAlpha(TOP_ALIGNMENT);
+        ChartFrame frame=new ChartFrame("Grafico Circular de bugs",chart);
+        frame.setVisible(true);
+        frame.setSize(450, 500);
+    }//GEN-LAST:event_bt_Grafica_CircularMouseClicked
 
     /**
      * @param args the command line arguments
@@ -982,7 +1034,7 @@ public class Main extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main().setVisible(true);
-
+                
             }
         });
     }
@@ -992,6 +1044,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JFrame BugFrame;
     private javax.swing.JButton bt_Borrar_Desarollador;
     private javax.swing.JButton bt_Borrar_Proyecto;
+    private javax.swing.JButton bt_Bug_Admin;
     private javax.swing.JButton bt_CRUD_Desarollador;
     private javax.swing.JButton bt_CRUD_Software;
     private javax.swing.JButton bt_Cerrar_CRUD_Desarollador;
@@ -1000,6 +1053,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton bt_Cerrar_Ver_Software;
     private javax.swing.JButton bt_Crear_Desarollador;
     private javax.swing.JButton bt_Crear_Proyecto;
+    private javax.swing.JButton bt_Grafica_Circular;
     private javax.swing.JButton bt_Login;
     private javax.swing.JButton bt_Modificar_Desarollador;
     private javax.swing.JButton bt_Modificar_Proyecto;
@@ -1057,7 +1111,7 @@ public class Main extends javax.swing.JFrame {
     static ArrayList<Desarollador> desarolladores = new ArrayList();
     static ArrayList<Bug> bugs = new ArrayList();
     static ArrayList<Proyecto_Software> softwares = new ArrayList();
-
+    
     public static void agregar_pre() {
         users.add(new Usuarios("administrador", "123"));
         users.add(new Usuarios("desarollador", "456"));
