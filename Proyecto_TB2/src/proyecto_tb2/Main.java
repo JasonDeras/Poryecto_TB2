@@ -8,6 +8,12 @@ package proyecto_tb2;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -15,6 +21,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Main extends javax.swing.JFrame {
 
+    Connection con = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
     /**
      * Creates new form Main
      */
@@ -78,6 +87,23 @@ public class Main extends javax.swing.JFrame {
         bt_Modificar_Desarollador = new javax.swing.JButton();
         bt_Cerrar_Ver_Desarrollador = new javax.swing.JButton();
         bt_Borrar_Desarollador = new javax.swing.JButton();
+        BugFrame = new javax.swing.JFrame();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        text5 = new javax.swing.JTextField();
+        text4 = new javax.swing.JTextField();
+        text3 = new javax.swing.JTextField();
+        text2 = new javax.swing.JTextField();
+        text1 = new javax.swing.JTextField();
+        text6 = new javax.swing.JTextField();
+        text7 = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        B_BugInsertar = new javax.swing.JButton();
         jtf_Roll = new javax.swing.JTextField();
         bt_Login = new javax.swing.JButton();
         jpf_Contraseña = new javax.swing.JPasswordField();
@@ -482,12 +508,113 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel1.setText("Codigo:");
+
+        jLabel10.setText("Descripcion:");
+
+        jLabel12.setText("Codigo de proyecto de software:");
+
+        jLabel14.setText("Nivel de Urgencia[1-5]:");
+
+        jLabel16.setText("Estado: nuevo, asignado o finalizado");
+
+        jLabel17.setText("Fecha inicio de reparacion:");
+
+        jLabel18.setText("Fecha finalizado");
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel19.setText("BUG");
+
+        B_BugInsertar.setText("Insertar");
+        B_BugInsertar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B_BugInsertarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout BugFrameLayout = new javax.swing.GroupLayout(BugFrame.getContentPane());
+        BugFrame.getContentPane().setLayout(BugFrameLayout);
+        BugFrameLayout.setHorizontalGroup(
+            BugFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BugFrameLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(BugFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel18))
+                .addGap(18, 18, 18)
+                .addGroup(BugFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(text5)
+                    .addComponent(text4)
+                    .addComponent(text3)
+                    .addComponent(text2)
+                    .addComponent(text1)
+                    .addComponent(text6)
+                    .addComponent(text7, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BugFrameLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(BugFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BugFrameLayout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addGap(189, 189, 189))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BugFrameLayout.createSequentialGroup()
+                        .addComponent(B_BugInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(152, 152, 152))))
+        );
+        BugFrameLayout.setVerticalGroup(
+            BugFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BugFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel19)
+                .addGap(66, 66, 66)
+                .addGroup(BugFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(BugFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(text2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(BugFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(text3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(BugFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(text4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(BugFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(text5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(BugFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addComponent(text6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(BugFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel18)
+                    .addComponent(text7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(B_BugInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         bt_Login.setText("Login");
         bt_Login.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bt_LoginMouseClicked(evt);
+            }
+        });
+        bt_Login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_LoginActionPerformed(evt);
             }
         });
 
@@ -696,6 +823,46 @@ public class Main extends javax.swing.JFrame {
         }//casos para las opciones para modificar el desarollador
     }//GEN-LAST:event_bt_Modificar_DesarolladorMouseClicked
 
+    private void bt_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_LoginActionPerformed
+        //BugFrame.setModal(true);
+        BugFrame.pack();
+        BugFrame.setLocationRelativeTo(this);
+        BugFrame.setVisible(true);
+    }//GEN-LAST:event_bt_LoginActionPerformed
+
+    private void B_BugInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_BugInsertarActionPerformed
+        try {
+            String sql= "INSERT INTO BUG (CODIGO, DESCRIPCION, CODIGO_PROYECTO_SOFTWARE, NIVEL_URGENCIA, ESTADO, FECHAINICIO, FECHAFIN)VALUES (?,?,?,?,?,?,?)";
+            
+            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","rick","workspace@9034");
+            
+            pst = con.prepareStatement(sql);
+            
+            pst.setString(1, text1.getText());
+            pst.setString(2, text2.getText());
+            pst.setString(3, text3.getText());
+            pst.setString(4, text4.getText());
+            pst.setString(5, text5.getText());
+            pst.setString(6, text6.getText());
+            pst.setString(7, text7.getText());
+            
+            pst.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "success");
+            
+            text1.setText("");
+            text2.setText("");
+            text3.setText("");
+            text4.setText("");
+            text5.setText("");
+            text6.setText("");
+            text7.setText("");
+                    
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_B_BugInsertarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -733,6 +900,8 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton B_BugInsertar;
+    private javax.swing.JFrame BugFrame;
     private javax.swing.JButton bt_Borrar_Desarollador;
     private javax.swing.JButton bt_CRUD_Desarollador;
     private javax.swing.JButton bt_CRUD_Software;
@@ -743,9 +912,17 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton bt_Modificar_Desarollador;
     private javax.swing.JButton bt_Salir_Admins;
     private javax.swing.JButton bt_Ver_Desarolladores;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -785,6 +962,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField jtf_Roll;
     private javax.swing.JTextField jtf_Tecnologia_Domina;
     private javax.swing.JTextField jtf_Usuario;
+    private javax.swing.JTextField text1;
+    private javax.swing.JTextField text2;
+    private javax.swing.JTextField text3;
+    private javax.swing.JTextField text4;
+    private javax.swing.JTextField text5;
+    private javax.swing.JTextField text6;
+    private javax.swing.JTextField text7;
     // End of variables declaration//GEN-END:variables
     static ArrayList<Usuarios> users = new ArrayList();
     static ArrayList<Desarollador> desarolladores = new ArrayList();
