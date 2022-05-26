@@ -209,6 +209,11 @@ public class Main extends javax.swing.JFrame {
         });
 
         bt_Ver_Proyectos.setText("Ver Proyectos");
+        bt_Ver_Proyectos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_Ver_ProyectosMouseClicked(evt);
+            }
+        });
 
         bt_Cerrar_Proyectos.setText("Cerrar Ventana");
         bt_Cerrar_Proyectos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1235,6 +1240,21 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
     }//GEN-LAST:event_bt_Crear_DesarolladorActionPerformed
+
+    private void bt_Ver_ProyectosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Ver_ProyectosMouseClicked
+        // TODO add your handling code here:
+        jd_Ver_Projectos.setLocationRelativeTo(this);
+        jd_Ver_Projectos.setVisible(true);
+        jd_Ver_Projectos.setSize(250, 250);
+        
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Codigo Projecto");
+        model.addColumn("Nombre Projecto");
+        for (int i = 0; i < softwares.size(); i++) {
+            model.addRow(new Object[]{"" + softwares.get(i).getCodigo_P(), "" + softwares.get(i).getNombre_P()});
+        }
+        jt_Projectos_Software.setModel(model);
+    }//GEN-LAST:event_bt_Ver_ProyectosMouseClicked
 
     /**
      * @param args the command line arguments
