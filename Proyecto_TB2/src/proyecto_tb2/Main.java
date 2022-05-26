@@ -12,8 +12,12 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
@@ -66,6 +70,12 @@ public class Main extends javax.swing.JFrame {
         bt_Crear_Proyecto = new javax.swing.JButton();
         bt_Ver_Proyectos = new javax.swing.JButton();
         bt_Cerrar_Proyectos = new javax.swing.JButton();
+        jtf_equipoDes_proyecto = new javax.swing.JTextField();
+        jtf_listaBugs_proyecto = new javax.swing.JTextField();
+        jtf_listaBugsFin_proyecto = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jd_CRUD_Desarollador = new javax.swing.JDialog();
         bt_Crear_Desarollador = new javax.swing.JButton();
         bt_Cerrar_CRUD_Desarollador = new javax.swing.JButton();
@@ -192,6 +202,11 @@ public class Main extends javax.swing.JFrame {
                 bt_Crear_ProyectoMouseClicked(evt);
             }
         });
+        bt_Crear_Proyecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_Crear_ProyectoActionPerformed(evt);
+            }
+        });
 
         bt_Ver_Proyectos.setText("Ver Proyectos");
 
@@ -202,40 +217,53 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Equipo Desarrollo");
+
+        jLabel3.setText("Lista de Bugs");
+
+        jLabel4.setText("Lista de Bugs Fin");
+
         javax.swing.GroupLayout jd_CRUD_SoftwareLayout = new javax.swing.GroupLayout(jd_CRUD_Software.getContentPane());
         jd_CRUD_Software.getContentPane().setLayout(jd_CRUD_SoftwareLayout);
         jd_CRUD_SoftwareLayout.setHorizontalGroup(
             jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_CRUD_SoftwareLayout.createSequentialGroup()
                 .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jd_CRUD_SoftwareLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jl_FechaF_Proyecto)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jtf_FechaF_Proyecto))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jd_CRUD_SoftwareLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jl_Codigo_Proyecto)
-                            .addGap(18, 18, 18)
-                            .addComponent(jtf_Codigo_Proyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jd_CRUD_SoftwareLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jl_Nombre_Proyecto)
-                                .addComponent(jl_Fecha_Inicio))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtf_Nombre_Proyecto)
-                                .addComponent(jtf_FechaI_Proyecto))))
                     .addGroup(jd_CRUD_SoftwareLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
+                        .addContainerGap()
+                        .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jd_CRUD_SoftwareLayout.createSequentialGroup()
+                                .addComponent(jl_Codigo_Proyecto)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtf_Codigo_Proyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jd_CRUD_SoftwareLayout.createSequentialGroup()
+                                .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jl_Nombre_Proyecto)
+                                    .addComponent(jl_Fecha_Inicio))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtf_Nombre_Proyecto)
+                                    .addComponent(jtf_FechaI_Proyecto)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jd_CRUD_SoftwareLayout.createSequentialGroup()
+                                .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jl_FechaF_Proyecto)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtf_listaBugs_proyecto)
+                                    .addComponent(jtf_equipoDes_proyecto)
+                                    .addComponent(jtf_FechaF_Proyecto)
+                                    .addComponent(jtf_listaBugsFin_proyecto)))))
+                    .addGroup(jd_CRUD_SoftwareLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
                         .addComponent(bt_Crear_Proyecto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(bt_Ver_Proyectos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(bt_Cerrar_Proyectos)))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         jd_CRUD_SoftwareLayout.setVerticalGroup(
             jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,18 +284,35 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jl_FechaF_Proyecto)
                     .addComponent(jtf_FechaF_Proyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addGap(12, 12, 12)
+                .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtf_equipoDes_proyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtf_listaBugs_proyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(20, 20, 20)
+                .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtf_listaBugsFin_proyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_Crear_Proyecto)
                     .addComponent(bt_Ver_Proyectos)
                     .addComponent(bt_Cerrar_Proyectos))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
 
         bt_Crear_Desarollador.setText("Crear");
         bt_Crear_Desarollador.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bt_Crear_DesarolladorMouseClicked(evt);
+            }
+        });
+        bt_Crear_Desarollador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_Crear_DesarolladorActionPerformed(evt);
             }
         });
 
@@ -298,19 +343,18 @@ public class Main extends javax.swing.JFrame {
         jd_CRUD_DesarolladorLayout.setHorizontalGroup(
             jd_CRUD_DesarolladorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_CRUD_DesarolladorLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jd_CRUD_DesarolladorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jd_CRUD_DesarolladorLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jl_Tecnologia_Domina)
                         .addGap(18, 18, 18)
                         .addComponent(jtf_Tecnologia_Domina))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jd_CRUD_DesarolladorLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jd_CRUD_DesarolladorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bt_Crear_Desarollador)
                             .addComponent(jl_Codigo_Desarollador)
                             .addComponent(jl_Nombre_Desarollador)
-                            .addComponent(jl_Lengauaje_Domina))
+                            .addComponent(jl_Lengauaje_Domina)
+                            .addComponent(bt_Crear_Desarollador, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(jd_CRUD_DesarolladorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtf_Codigo_Desarollador)
@@ -1109,7 +1153,11 @@ public class Main extends javax.swing.JFrame {
        for (int i = 0; i < desarolladores.size(); i++) {
             if (desarolladores.get(i).getCodigo_D()==Integer.parseInt(control)&& desarolladores.get(i).getReparar().getCodigo()==(Integer.parseInt(fin))) {
             desarolladores.get(i).getReparar().setEstado("finalizado");
-            desarolladores.get(i).getReparar().setF_Finalizado(dtf.format(LocalDateTime.now()));
+                try {
+                    desarolladores.get(i).getReparar().setF_Finalizado((Date) new SimpleDateFormat("dd/mm/yyy").parse(dtf.format(LocalDateTime.now())));
+                } catch (ParseException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }//GEN-LAST:event_bt_Bugs_FinalizadosMouseClicked
@@ -1119,11 +1167,74 @@ public class Main extends javax.swing.JFrame {
         String bug=JOptionPane.showInputDialog(jd_Desarollador,"Ingrese el codigo del bug a asignar fecha: ");
         for (int i = 0; i < desarolladores.size(); i++) {
             if (desarolladores.get(i).getCodigo_D()==Integer.parseInt(control)&& desarolladores.get(i).getReparar().getCodigo()==(Integer.parseInt(bug))) {
-                desarolladores.get(i).getReparar().setF_Inicio((Date)JOptionPane.showInputDialog(jd_Desarollador,"Ingrese la fecha de inicio de reparacion: "));
+                try {
+                    desarolladores.get(i).getReparar().setF_Inicio((Date) new SimpleDateFormat("dd/mm/yyy").parse(JOptionPane.showInputDialog(jd_Desarollador,"ngrese el codigo del bug a finalizar: ")));
+                } catch (ParseException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
-        
     }//GEN-LAST:event_bt_Asignar_Fecha_BugMouseClicked
+
+    private void bt_Crear_ProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_Crear_ProyectoActionPerformed
+        try {
+            String sql = "INSERT INTO PROYECTO_SOFTWARE (CODIGO_PROYECTO, NOMBRE_PROYECTO, FECHAINICIO, FECHAFIN, EQUIPO_DESARR, LISTA_BUGS, LISTA_BUGS_FINALIZADA)VALUES (?,?,?,?,?,?,?)";
+            
+            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
+            
+            pst = con.prepareStatement(sql);
+            
+            pst.setString(1, jtf_Codigo_Proyecto.getText());
+            pst.setString(2, jtf_Nombre_Proyecto.getText());
+            pst.setString(3, jtf_FechaI_Proyecto.getText());
+            pst.setString(4, jtf_FechaF_Proyecto.getText());
+            pst.setString(5, jtf_equipoDes_proyecto.getText());
+            pst.setString(6, jtf_listaBugs_proyecto.getText());
+            pst.setString(7, jtf_listaBugsFin_proyecto.getText());
+            
+            pst.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "success");
+            
+            jtf_Codigo_Proyecto.setText("");
+            jtf_Nombre_Proyecto.setText("");
+            jtf_FechaI_Proyecto.setText("");
+            jtf_FechaI_Proyecto.setText("");
+            jtf_FechaF_Proyecto.setText("");
+            jtf_listaBugs_proyecto.setText("");
+            jtf_listaBugsFin_proyecto.setText("");
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_bt_Crear_ProyectoActionPerformed
+
+    private void bt_Crear_DesarolladorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_Crear_DesarolladorActionPerformed
+        try {
+            String sql = "INSERT INTO EQUIPO_DESARR (CODIGO_DESARR, NOMBRE_EMPLEADO, LENGUAJES_PROGRA_MANEJA, TECNOLOGIAS_DOMINA)VALUES (?,?,?,?)";
+            
+            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
+            
+            pst = con.prepareStatement(sql);
+            
+            pst.setString(1, jtf_Codigo_Desarollador.getText());
+            pst.setString(2, jtf_Nombre_Empleado.getText());
+            pst.setString(3, jtf_Lenguaje_Domina.getText());
+            pst.setString(4, jtf_Tecnologia_Domina.getText());
+            
+            pst.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "success");
+            
+            jtf_Codigo_Desarollador.setText("");
+            jtf_Nombre_Empleado.setText("");
+            jtf_Lenguaje_Domina.setText("");
+            jtf_Tecnologia_Domina.setText("");    
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_bt_Crear_DesarolladorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1193,6 +1304,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JDialog jd_Administradores;
@@ -1226,6 +1340,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField jtf_Roll;
     private javax.swing.JTextField jtf_Tecnologia_Domina;
     private javax.swing.JTextField jtf_Usuario;
+    private javax.swing.JTextField jtf_equipoDes_proyecto;
+    private javax.swing.JTextField jtf_listaBugsFin_proyecto;
+    private javax.swing.JTextField jtf_listaBugs_proyecto;
     private javax.swing.JTextField text1;
     private javax.swing.JTextField text2;
     private javax.swing.JTextField text3;
