@@ -1201,6 +1201,8 @@ public class Main extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, "success");
             
+            softwares.add(new Proyecto_Software(Integer.parseInt(jtf_Codigo_Proyecto.getText()), jtf_Nombre_Proyecto.getText()));
+            
             jtf_Codigo_Proyecto.setText("");
             jtf_Nombre_Proyecto.setText("");
             jtf_FechaI_Proyecto.setText("");

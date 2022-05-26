@@ -1,6 +1,5 @@
 package proyecto_tb2;
 
-import java.sql.Date;
 import java.util.*;
 
 public class Proyecto_Software {
@@ -11,6 +10,13 @@ public class Proyecto_Software {
     ArrayList<Desarollador>desarrolladores;
     ArrayList<Bug>bugs;
     ArrayList<Bug>bugs_finalizados;
+
+    public Proyecto_Software(int codigo_P, String nombre_P) {
+        this.codigo_P = codigo_P;
+        this.nombre_P = nombre_P;
+    }
+    
+    
 
     public Proyecto_Software(int codigo_P, String nombre_P, String fecha_I, String fecha_F) {
         this.codigo_P = codigo_P;
