@@ -14,7 +14,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author HP
@@ -24,6 +23,7 @@ public class Main extends javax.swing.JFrame {
     Connection con = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+
     /**
      * Creates new form Main
      */
@@ -49,26 +49,15 @@ public class Main extends javax.swing.JFrame {
         jd_CRUD_Software = new javax.swing.JDialog();
         jtf_Codigo_Proyecto = new javax.swing.JTextField();
         jtf_Nombre_Proyecto = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
+        jtf_FechaI_Proyecto = new javax.swing.JTextField();
+        jtf_FechaF_Proyecto = new javax.swing.JTextField();
         jl_Codigo_Proyecto = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        jl_Nombre_Proyecto = new javax.swing.JLabel();
         jl_Fecha_Inicio = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        jl_FechaF_Proyecto = new javax.swing.JLabel();
+        bt_Crear_Proyecto = new javax.swing.JButton();
+        bt_Ver_Proyectos = new javax.swing.JButton();
+        bt_Cerrar_Proyectos = new javax.swing.JButton();
         jd_CRUD_Desarollador = new javax.swing.JDialog();
         bt_Crear_Desarollador = new javax.swing.JButton();
         bt_Cerrar_CRUD_Desarollador = new javax.swing.JButton();
@@ -104,6 +93,12 @@ public class Main extends javax.swing.JFrame {
         text7 = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         B_BugInsertar = new javax.swing.JButton();
+        jd_Ver_Projectos = new javax.swing.JDialog();
+        bt_Modificar_Proyecto = new javax.swing.JButton();
+        bt_Cerrar_Ver_Software = new javax.swing.JButton();
+        bt_Borrar_Proyecto = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jt_Projectos_Software = new javax.swing.JTable();
         jtf_Roll = new javax.swing.JTextField();
         bt_Login = new javax.swing.JButton();
         jpf_Contraseña = new javax.swing.JPasswordField();
@@ -157,119 +152,64 @@ public class Main extends javax.swing.JFrame {
                 .addGap(43, 43, 43))
         );
 
-        jTextField4.setText("jTextField1");
-
-        jTextField10.setText("jTextField1");
-
-        jTextField11.setText("jTextField1");
-
-        jTextField12.setText("jTextField1");
-
-        jTextField13.setText("jTextField1");
-
-        jTextField14.setText("jTextField1");
-
         jl_Codigo_Proyecto.setText("Codigo del Proyecto");
 
-        jLabel2.setText("Nombre del Proyecto");
-
-        jLabel3.setText("jLabel1");
-
-        jLabel4.setText("jLabel1");
-
-        jLabel5.setText("jLabel1");
-
-        jLabel6.setText("jLabel1");
-
-        jLabel7.setText("jLabel1");
-
-        jLabel8.setText("jLabel1");
-
-        jLabel9.setText("jLabel1");
+        jl_Nombre_Proyecto.setText("Nombre del Proyecto");
 
         jl_Fecha_Inicio.setText("Fecha de Inicio");
 
-        jLabel11.setText("jLabel1");
+        jl_FechaF_Proyecto.setText("Fecha de Finalizacion");
 
-        jLabel13.setText("jLabel1");
+        bt_Crear_Proyecto.setText("Crear");
+        bt_Crear_Proyecto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_Crear_ProyectoMouseClicked(evt);
+            }
+        });
 
-        jLabel15.setText("jLabel1");
+        bt_Ver_Proyectos.setText("Ver Proyectos");
+
+        bt_Cerrar_Proyectos.setText("Cerrar Ventana");
+        bt_Cerrar_Proyectos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_Cerrar_ProyectosMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jd_CRUD_SoftwareLayout = new javax.swing.GroupLayout(jd_CRUD_Software.getContentPane());
         jd_CRUD_Software.getContentPane().setLayout(jd_CRUD_SoftwareLayout);
         jd_CRUD_SoftwareLayout.setHorizontalGroup(
             jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_CRUD_SoftwareLayout.createSequentialGroup()
-                .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jd_CRUD_SoftwareLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jl_FechaF_Proyecto)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jtf_FechaF_Proyecto))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jd_CRUD_SoftwareLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jl_Codigo_Proyecto)
+                            .addGap(18, 18, 18)
+                            .addComponent(jtf_Codigo_Proyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jd_CRUD_SoftwareLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jl_Nombre_Proyecto)
+                                .addComponent(jl_Fecha_Inicio))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jtf_Nombre_Proyecto)
+                                .addComponent(jtf_FechaI_Proyecto))))
                     .addGroup(jd_CRUD_SoftwareLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jd_CRUD_SoftwareLayout.createSequentialGroup()
-                                .addComponent(jl_Codigo_Proyecto)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtf_Codigo_Proyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jd_CRUD_SoftwareLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(76, 76, 76)
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel15))
-                            .addGroup(jd_CRUD_SoftwareLayout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel5))
-                            .addGroup(jd_CRUD_SoftwareLayout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(36, 36, 36)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel8))))
-                    .addGroup(jd_CRUD_SoftwareLayout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(jLabel9))
-                    .addGroup(jd_CRUD_SoftwareLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jl_Fecha_Inicio))
+                        .addGap(23, 23, 23)
+                        .addComponent(bt_Crear_Proyecto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtf_Nombre_Proyecto)
-                            .addComponent(jTextField3))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52))
-            .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_CRUD_SoftwareLayout.createSequentialGroup()
-                    .addContainerGap(198, Short.MAX_VALUE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(145, 145, 145)))
-            .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_CRUD_SoftwareLayout.createSequentialGroup()
-                    .addContainerGap(208, Short.MAX_VALUE)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(135, 135, 135)))
-            .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_CRUD_SoftwareLayout.createSequentialGroup()
-                    .addContainerGap(218, Short.MAX_VALUE)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(125, 125, 125)))
-            .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_CRUD_SoftwareLayout.createSequentialGroup()
-                    .addContainerGap(228, Short.MAX_VALUE)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(115, 115, 115)))
-            .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_CRUD_SoftwareLayout.createSequentialGroup()
-                    .addContainerGap(238, Short.MAX_VALUE)
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(105, 105, 105)))
-            .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jd_CRUD_SoftwareLayout.createSequentialGroup()
-                    .addGap(132, 132, 132)
-                    .addComponent(jLabel13)
-                    .addContainerGap(239, Short.MAX_VALUE)))
+                        .addComponent(bt_Ver_Proyectos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bt_Cerrar_Proyectos)))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         jd_CRUD_SoftwareLayout.setVerticalGroup(
             jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,65 +220,22 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jtf_Codigo_Proyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(jl_Nombre_Proyecto)
                     .addComponent(jtf_Nombre_Proyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jd_CRUD_SoftwareLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel15))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
-                        .addGap(53, 53, 53))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_CRUD_SoftwareLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jl_Fecha_Inicio))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75))))
-            .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_CRUD_SoftwareLayout.createSequentialGroup()
-                    .addContainerGap(156, Short.MAX_VALUE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(122, 122, 122)))
-            .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_CRUD_SoftwareLayout.createSequentialGroup()
-                    .addContainerGap(166, Short.MAX_VALUE)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(112, 112, 112)))
-            .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_CRUD_SoftwareLayout.createSequentialGroup()
-                    .addContainerGap(176, Short.MAX_VALUE)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(102, 102, 102)))
-            .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_CRUD_SoftwareLayout.createSequentialGroup()
-                    .addContainerGap(186, Short.MAX_VALUE)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(92, 92, 92)))
-            .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_CRUD_SoftwareLayout.createSequentialGroup()
-                    .addContainerGap(196, Short.MAX_VALUE)
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(82, 82, 82)))
-            .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jd_CRUD_SoftwareLayout.createSequentialGroup()
-                    .addGap(142, 142, 142)
-                    .addComponent(jLabel13)
-                    .addContainerGap(142, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtf_FechaI_Proyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jl_Fecha_Inicio))
+                .addGap(18, 18, 18)
+                .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jl_FechaF_Proyecto)
+                    .addComponent(jtf_FechaF_Proyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_Crear_Proyecto)
+                    .addComponent(bt_Ver_Proyectos)
+                    .addComponent(bt_Cerrar_Proyectos))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         bt_Crear_Desarollador.setText("Crear");
@@ -604,6 +501,80 @@ public class Main extends javax.swing.JFrame {
                 .addGap(34, 34, 34))
         );
 
+        bt_Modificar_Proyecto.setText("Modificar");
+        bt_Modificar_Proyecto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_Modificar_ProyectoMouseClicked(evt);
+            }
+        });
+
+        bt_Cerrar_Ver_Software.setText("Cerrar Ventana");
+
+        bt_Borrar_Proyecto.setText("Borrar");
+        bt_Borrar_Proyecto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_Borrar_ProyectoMouseClicked(evt);
+            }
+        });
+
+        jt_Projectos_Software.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo Proyecto", "Nombre Projecto"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jt_Projectos_Software);
+        if (jt_Projectos_Software.getColumnModel().getColumnCount() > 0) {
+            jt_Projectos_Software.getColumnModel().getColumn(0).setResizable(false);
+            jt_Projectos_Software.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        javax.swing.GroupLayout jd_Ver_ProjectosLayout = new javax.swing.GroupLayout(jd_Ver_Projectos.getContentPane());
+        jd_Ver_Projectos.getContentPane().setLayout(jd_Ver_ProjectosLayout);
+        jd_Ver_ProjectosLayout.setHorizontalGroup(
+            jd_Ver_ProjectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_Ver_ProjectosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jd_Ver_ProjectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bt_Modificar_Proyecto, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(bt_Borrar_Proyecto, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(bt_Cerrar_Ver_Software, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+        );
+        jd_Ver_ProjectosLayout.setVerticalGroup(
+            jd_Ver_ProjectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_Ver_ProjectosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jd_Ver_ProjectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jd_Ver_ProjectosLayout.createSequentialGroup()
+                        .addComponent(bt_Modificar_Proyecto)
+                        .addGap(30, 30, 30)
+                        .addComponent(bt_Borrar_Proyecto)
+                        .addGap(18, 18, 18)
+                        .addComponent(bt_Cerrar_Ver_Software)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         bt_Login.setText("Login");
@@ -704,7 +675,9 @@ public class Main extends javax.swing.JFrame {
 
     private void bt_CRUD_SoftwareMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_CRUD_SoftwareMouseClicked
         // TODO add your handling code here:
-
+        jd_CRUD_Software.setLocationRelativeTo(this);
+        jd_CRUD_Software.setVisible(true);
+        jd_CRUD_Software.setSize(250, 250);
     }//GEN-LAST:event_bt_CRUD_SoftwareMouseClicked
 
     private void bt_Cerrar_CRUD_DesarolladorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Cerrar_CRUD_DesarolladorMouseClicked
@@ -769,17 +742,17 @@ public class Main extends javax.swing.JFrame {
     private void bt_Modificar_DesarolladorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Modificar_DesarolladorMouseClicked
         // TODO add your handling code here:
         String input;
-        input = JOptionPane.showInputDialog(jd_CRUD_Desarollador, "1. Asignar Bug\n2. Agregar Tecnologia\n3. Agregar Lenguaje\n Ingrese una opcion: ");
+        input = JOptionPane.showInputDialog(jd_Ver_Desarollador, "1. Asignar Bug\n2. Agregar Tecnologia\n3. Agregar Lenguaje\n Ingrese una opcion: ");
         switch (input) {
             case "1": {
                 String desa;
                 String asignar;
-                desa = JOptionPane.showInputDialog(jd_CRUD_Desarollador, "Ingrese el codigo del desarollador a asignar el bug: ");
+                desa = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el codigo del desarollador a asignar el bug: ");
                 String bug = "";
                 for (int i = 0; i < bugs.size(); i++) {
                     bug += "" + bugs.get(i).getCodigo() + "\n";
                 }
-                asignar = JOptionPane.showInputDialog(jd_CRUD_Desarollador, bug + "\nIngrese un bug a asignar");
+                asignar = JOptionPane.showInputDialog(jd_Ver_Desarollador, bug + "\nIngrese un bug a asignar");
 
                 for (int i = 0; i < desarolladores.size(); i++) {
                     if (desarolladores.get(i).getCodigo_D() == Integer.parseInt(desa)) {
@@ -792,9 +765,9 @@ public class Main extends javax.swing.JFrame {
             case "2": {
                 String desa;
                 String asignar;
-                desa = JOptionPane.showInputDialog(jd_CRUD_Desarollador, "Ingrese el codigo del desarollador a agregar la tecnologia: ");
+                desa = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el codigo del desarollador a agregar la tecnologia: ");
 
-                asignar = JOptionPane.showInputDialog(jd_CRUD_Desarollador, "Ingrese la tecnologia a agregar: ");
+                asignar = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese la tecnologia a agregar: ");
 
                 for (int i = 0; i < desarolladores.size(); i++) {
                     if (desarolladores.get(i).getCodigo_D() == Integer.parseInt(desa)) {
@@ -806,9 +779,9 @@ public class Main extends javax.swing.JFrame {
             case "3": {
                 String desa;
                 String asignar;
-                desa = JOptionPane.showInputDialog(jd_CRUD_Desarollador, "Ingrese el codigo del desarollador a agregar ellenguaje: ");
+                desa = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el codigo del desarollador a agregar ellenguaje: ");
 
-                asignar = JOptionPane.showInputDialog(jd_CRUD_Desarollador, "Ingrese el lenguaje a agregar: ");
+                asignar = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el lenguaje a agregar: ");
 
                 for (int i = 0; i < desarolladores.size(); i++) {
                     if (desarolladores.get(i).getCodigo_D() == Integer.parseInt(desa)) {
@@ -818,7 +791,7 @@ public class Main extends javax.swing.JFrame {
             }
             break;
             default:
-                JOptionPane.showMessageDialog(jd_CRUD_Desarollador, "Opcion no valida");
+                JOptionPane.showMessageDialog(jd_Ver_Desarollador, "Opcion no valida");
 
         }//casos para las opciones para modificar el desarollador
     }//GEN-LAST:event_bt_Modificar_DesarolladorMouseClicked
@@ -832,12 +805,12 @@ public class Main extends javax.swing.JFrame {
 
     private void B_BugInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_BugInsertarActionPerformed
         try {
-            String sql= "INSERT INTO BUG (CODIGO, DESCRIPCION, CODIGO_PROYECTO_SOFTWARE, NIVEL_URGENCIA, ESTADO, FECHAINICIO, FECHAFIN)VALUES (?,?,?,?,?,?,?)";
-            
-            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","rick","workspace@9034");
-            
+            String sql = "INSERT INTO BUG (CODIGO, DESCRIPCION, CODIGO_PROYECTO_SOFTWARE, NIVEL_URGENCIA, ESTADO, FECHAINICIO, FECHAFIN)VALUES (?,?,?,?,?,?,?)";
+
+            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
+
             pst = con.prepareStatement(sql);
-            
+
             pst.setString(1, text1.getText());
             pst.setString(2, text2.getText());
             pst.setString(3, text3.getText());
@@ -845,11 +818,11 @@ public class Main extends javax.swing.JFrame {
             pst.setString(5, text5.getText());
             pst.setString(6, text6.getText());
             pst.setString(7, text7.getText());
-            
+
             pst.executeUpdate();
-            
+
             JOptionPane.showMessageDialog(null, "success");
-            
+
             text1.setText("");
             text2.setText("");
             text3.setText("");
@@ -857,11 +830,126 @@ public class Main extends javax.swing.JFrame {
             text5.setText("");
             text6.setText("");
             text7.setText("");
-                    
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }//GEN-LAST:event_B_BugInsertarActionPerformed
+
+    private void bt_Crear_ProyectoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Crear_ProyectoMouseClicked
+        // TODO add your handling code here:
+        int codigo_P = Integer.parseInt(jtf_Codigo_Proyecto.getText());
+        String nombre_P = jtf_Nombre_Proyecto.getText();
+        String fecha_I = jtf_FechaI_Proyecto.getText();
+        String fecha_F = jtf_FechaF_Proyecto.getText();
+        softwares.add(new Proyecto_Software(codigo_P, nombre_P, fecha_I, fecha_F));
+        jtf_Codigo_Proyecto.setText("");
+        jtf_Nombre_Proyecto.setText("");
+        jtf_FechaI_Proyecto.setText("");
+        jtf_FechaF_Proyecto.setText("");
+    }//GEN-LAST:event_bt_Crear_ProyectoMouseClicked
+
+    private void bt_Cerrar_ProyectosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Cerrar_ProyectosMouseClicked
+        // TODO add your handling code here:
+        jd_CRUD_Software.setVisible(false);
+    }//GEN-LAST:event_bt_Cerrar_ProyectosMouseClicked
+
+    private void bt_Borrar_ProyectoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Borrar_ProyectoMouseClicked
+        // TODO add your handling code here:
+        softwares.remove(jt_Projectos_Software.getSelectedRow());
+        DefaultTableModel model = (DefaultTableModel) jt_Projectos_Software.getModel();
+        model.removeRow(jt_Projectos_Software.getSelectedRow());
+        jt_Projectos_Software.setModel(model);
+    }//GEN-LAST:event_bt_Borrar_ProyectoMouseClicked
+
+    private void bt_Modificar_ProyectoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Modificar_ProyectoMouseClicked
+        // TODO add your handling code here:
+        String input;
+        input = JOptionPane.showInputDialog(jd_Ver_Projectos, "1. Cambiar Nombre\n2. Fecha Inicio\n3. Fecha Finalizacion\n4. Agregar Desarollador"
+                + "\n5. Agregar Bug\n Ingrese una opcion: ");
+        switch (input) {
+            case "1": {
+                String desa;
+                desa = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese el codigo del proyecto a cambiar nombre: ");
+                String asignar = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese el nuevo nombre: ");
+                for (int i = 0; i < softwares.size(); i++) {
+                    if (softwares.get(i).getCodigo_P() == Integer.parseInt(desa)) {
+                        softwares.get(i).setNombre_P(asignar);
+                    }
+                }
+
+                break;
+            }
+            case "2": {
+                String desa;
+                String asignar;
+                desa = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese el codigo del proyecto a cambiar la fecha de Inicio: ");
+
+                asignar = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese nueva fecha inicio: ");
+
+                for (int i = 0; i < softwares.size(); i++) {
+                    if (softwares.get(i).getCodigo_P() == Integer.parseInt(desa)) {
+                        softwares.get(i).setFecha_I(asignar);
+                    }
+                }
+                break;
+            }
+            case "3": {
+                String desa;
+                String asignar;
+                desa = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese el codigo del proyecto a cambiar la fecha de finalizacionn: ");
+
+                asignar = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese nueva fecha finalizacion: ");
+
+                for (int i = 0; i < softwares.size(); i++) {
+                    if (softwares.get(i).getCodigo_P() == Integer.parseInt(desa)) {
+                        softwares.get(i).setFecha_F(asignar);
+                    }
+                }
+            }
+            break;
+            case "4": {
+
+                String desa;
+                String asignar;
+                desa = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el codigo del proyecto a asignar el desarollador: ");
+                String desarollador = "";
+                for (int i = 0; i < desarolladores.size(); i++) {
+                    desarollador += "" + desarolladores.get(i).getCodigo_D() + "\n";
+                }
+                asignar = JOptionPane.showInputDialog(jd_Ver_Desarollador, desarollador + "\nIngrese un desarollador a asignar");
+
+                for (int i = 0; i < softwares.size(); i++) {
+                    if (softwares.get(i).getCodigo_P() == Integer.parseInt(desa)) {
+                        softwares.get(i).addDesarollador(desarolladores.get(Integer.parseInt(asignar)));
+                    }
+                }
+
+                break;
+            }
+            case "5": {
+
+                String desa;
+                String asignar;
+                desa = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el codigo del proyecto a asignar el desarollador: ");
+                String bug = "";
+                for (int i = 0; i < bugs.size(); i++) {
+                    bug += "" + bugs.get(i).getCodigo() + "\n";
+                }
+                asignar = JOptionPane.showInputDialog(jd_Ver_Desarollador, bug + "\nIngrese un bug a asignar");
+
+                for (int i = 0; i < softwares.size(); i++) {
+                    if (softwares.get(i).getCodigo_P() == Integer.parseInt(desa)) {
+                        softwares.get(i).addBugs(bugs.get(Integer.parseInt(asignar)));
+                    }
+                }
+
+                break;
+            }
+            default:
+                JOptionPane.showMessageDialog(jd_Ver_Projectos, "Opcion no valida");
+        }
+    }//GEN-LAST:event_bt_Modificar_ProyectoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -903,59 +991,54 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton B_BugInsertar;
     private javax.swing.JFrame BugFrame;
     private javax.swing.JButton bt_Borrar_Desarollador;
+    private javax.swing.JButton bt_Borrar_Proyecto;
     private javax.swing.JButton bt_CRUD_Desarollador;
     private javax.swing.JButton bt_CRUD_Software;
     private javax.swing.JButton bt_Cerrar_CRUD_Desarollador;
+    private javax.swing.JButton bt_Cerrar_Proyectos;
     private javax.swing.JButton bt_Cerrar_Ver_Desarrollador;
+    private javax.swing.JButton bt_Cerrar_Ver_Software;
     private javax.swing.JButton bt_Crear_Desarollador;
+    private javax.swing.JButton bt_Crear_Proyecto;
     private javax.swing.JButton bt_Login;
     private javax.swing.JButton bt_Modificar_Desarollador;
+    private javax.swing.JButton bt_Modificar_Proyecto;
     private javax.swing.JButton bt_Salir_Admins;
     private javax.swing.JButton bt_Ver_Desarolladores;
+    private javax.swing.JButton bt_Ver_Proyectos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JDialog jd_Administradores;
     private javax.swing.JDialog jd_CRUD_Desarollador;
     private javax.swing.JDialog jd_CRUD_Software;
     private javax.swing.JDialog jd_Ver_Desarollador;
+    private javax.swing.JDialog jd_Ver_Projectos;
     private javax.swing.JLabel jl_Codigo_Desarollador;
     private javax.swing.JLabel jl_Codigo_Proyecto;
     private javax.swing.JLabel jl_Contraseña;
+    private javax.swing.JLabel jl_FechaF_Proyecto;
     private javax.swing.JLabel jl_Fecha_Inicio;
     private javax.swing.JLabel jl_Lengauaje_Domina;
     private javax.swing.JLabel jl_Nombre_Desarollador;
+    private javax.swing.JLabel jl_Nombre_Proyecto;
     private javax.swing.JLabel jl_Rol;
     private javax.swing.JLabel jl_Tecnologia_Domina;
     private javax.swing.JLabel jl_Usuario;
     private javax.swing.JPasswordField jpf_Contraseña;
     private javax.swing.JTable jt_Desarolladores;
+    private javax.swing.JTable jt_Projectos_Software;
     private javax.swing.JTextField jtf_Codigo_Desarollador;
     private javax.swing.JTextField jtf_Codigo_Proyecto;
+    private javax.swing.JTextField jtf_FechaF_Proyecto;
+    private javax.swing.JTextField jtf_FechaI_Proyecto;
     private javax.swing.JTextField jtf_Lenguaje_Domina;
     private javax.swing.JTextField jtf_Nombre_Empleado;
     private javax.swing.JTextField jtf_Nombre_Proyecto;
@@ -973,6 +1056,7 @@ public class Main extends javax.swing.JFrame {
     static ArrayList<Usuarios> users = new ArrayList();
     static ArrayList<Desarollador> desarolladores = new ArrayList();
     static ArrayList<Bug> bugs = new ArrayList();
+    static ArrayList<Proyecto_Software> softwares = new ArrayList();
 
     public static void agregar_pre() {
         users.add(new Usuarios("administrador", "123"));

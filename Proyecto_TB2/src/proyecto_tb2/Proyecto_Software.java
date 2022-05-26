@@ -6,13 +6,13 @@ import java.util.*;
 public class Proyecto_Software {
     int codigo_P;
     String nombre_P;
-    Date fecha_I;
-    Date fecha_F;
+    String fecha_I;
+    String fecha_F;
     ArrayList<Desarollador>desarrolladores;
     ArrayList<Bug>bugs;
     ArrayList<Bug>bugs_finalizados;
 
-    public Proyecto_Software(int codigo_P, String nombre_P, Date fecha_I, Date fecha_F) {
+    public Proyecto_Software(int codigo_P, String nombre_P, String fecha_I, String fecha_F) {
         this.codigo_P = codigo_P;
         this.nombre_P = nombre_P;
         this.fecha_I = fecha_I;
@@ -35,19 +35,19 @@ public class Proyecto_Software {
         this.nombre_P = nombre_P;
     }
 
-    public Date getFecha_I() {
+    public String getFecha_I() {
         return fecha_I;
     }
 
-    public void setFecha_I(Date fecha_I) {
+    public void setFecha_I(String fecha_I) {
         this.fecha_I = fecha_I;
     }
 
-    public Date getFecha_F() {
+    public String getFecha_F() {
         return fecha_F;
     }
 
-    public void setFecha_F(Date fecha_F) {
+    public void setFecha_F(String fecha_F) {
         this.fecha_F = fecha_F;
     }
 
