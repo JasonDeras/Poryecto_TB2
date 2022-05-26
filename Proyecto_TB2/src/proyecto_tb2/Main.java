@@ -1178,7 +1178,7 @@ public class Main extends javax.swing.JFrame {
 
     private void bt_Crear_ProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_Crear_ProyectoActionPerformed
         try {
-            String sql = "INSERT INTO PROYECTO_SOFTWARE (CODIGO_PROYECTO, NOMBRE_PROYECTO, FECHAINICIO, FECHAFIN, EQUIPO_DESARR, LISTA_BUGS, LISTA_BUGS_FINALIZADA)VALUES (?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO PROYECTO_SOFTWARE (CODIGO_PROYECTO, NOMBRE_PROYECTO, FECHAINICIO, FECHAFIN, EQUIPO_DESARR, LISTA_BUGS, LISTA_BUGS_FINALIZADOS)VALUES (?,?,?,?,?,?,?)";
             
             con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
             
