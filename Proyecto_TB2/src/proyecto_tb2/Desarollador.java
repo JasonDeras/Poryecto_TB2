@@ -19,7 +19,9 @@ public class Desarollador {
     Bug reparar;
      ArrayList<Proyecto_Software>proyectos=new ArrayList();
 
-    
+    public String getProject(int index){
+        return proyectos.get(index).getNombre_P();
+    }
 
     public Desarollador(int codigo_D, String nombre) {
         this.codigo_D = codigo_D;

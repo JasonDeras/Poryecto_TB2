@@ -8,9 +8,12 @@ package proyecto_tb2;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
@@ -106,6 +109,10 @@ public class Main extends javax.swing.JFrame {
         jt_Projectos_Software = new javax.swing.JTable();
         jd_QA = new javax.swing.JDialog();
         bt_Bug_QA = new javax.swing.JButton();
+        jd_Desarollador = new javax.swing.JDialog();
+        bt_Ver_Proyectos_Desarollador = new javax.swing.JButton();
+        bt_Bugs_Finalizados = new javax.swing.JButton();
+        bt_Asignar_Fecha_Bug = new javax.swing.JButton();
         jtf_Roll = new javax.swing.JTextField();
         bt_Login = new javax.swing.JButton();
         jpf_Contraseña = new javax.swing.JPasswordField();
@@ -622,6 +629,55 @@ public class Main extends javax.swing.JFrame {
                     .addContainerGap(138, Short.MAX_VALUE)))
         );
 
+        bt_Ver_Proyectos_Desarollador.setText("Ver Proyectos");
+        bt_Ver_Proyectos_Desarollador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_Ver_Proyectos_DesarolladorMouseClicked(evt);
+            }
+        });
+
+        bt_Bugs_Finalizados.setText("Bugs Finalizados");
+        bt_Bugs_Finalizados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_Bugs_FinalizadosMouseClicked(evt);
+            }
+        });
+
+        bt_Asignar_Fecha_Bug.setText("Fecha de Reparacion del bug");
+        bt_Asignar_Fecha_Bug.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_Asignar_Fecha_BugMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jd_DesarolladorLayout = new javax.swing.GroupLayout(jd_Desarollador.getContentPane());
+        jd_Desarollador.getContentPane().setLayout(jd_DesarolladorLayout);
+        jd_DesarolladorLayout.setHorizontalGroup(
+            jd_DesarolladorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_DesarolladorLayout.createSequentialGroup()
+                .addGroup(jd_DesarolladorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(bt_Asignar_Fecha_Bug)
+                    .addGroup(jd_DesarolladorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jd_DesarolladorLayout.createSequentialGroup()
+                            .addGap(58, 58, 58)
+                            .addComponent(bt_Ver_Proyectos_Desarollador))
+                        .addGroup(jd_DesarolladorLayout.createSequentialGroup()
+                            .addGap(45, 45, 45)
+                            .addComponent(bt_Bugs_Finalizados))))
+                .addContainerGap(201, Short.MAX_VALUE))
+        );
+        jd_DesarolladorLayout.setVerticalGroup(
+            jd_DesarolladorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_DesarolladorLayout.createSequentialGroup()
+                .addContainerGap(142, Short.MAX_VALUE)
+                .addComponent(bt_Ver_Proyectos_Desarollador)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bt_Asignar_Fecha_Bug)
+                .addGap(8, 8, 8)
+                .addComponent(bt_Bugs_Finalizados)
+                .addGap(62, 62, 62))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         bt_Login.setText("Login");
@@ -702,10 +758,13 @@ public class Main extends javax.swing.JFrame {
                 jd_Administradores.setSize(250, 250);
                 
             } else if (usuario.equalsIgnoreCase(users.get(i).getCredenciales()) && clave.equals(users.get(i).getClave()) && rol.equalsIgnoreCase("desarollador")) {
+                control=usuario;
                 jtf_Roll.setText("");
                 jpf_Contraseña.setText("");
                 jtf_Usuario.setText("");
-                System.out.println("desarollador");
+                jd_Desarollador.setLocationRelativeTo(this);
+                jd_Desarollador.setVisible(true);
+                jd_Desarollador.setSize(250, 250);
             } else if (usuario.equalsIgnoreCase(users.get(i).getCredenciales()) && clave.equals(users.get(i).getClave()) && rol.equalsIgnoreCase("qa")) {
                 jtf_Roll.setText("");
                 jpf_Contraseña.setText("");
@@ -1024,6 +1083,48 @@ public class Main extends javax.swing.JFrame {
         BugFrame.setVisible(true);
     }//GEN-LAST:event_bt_Bug_QAMouseClicked
 
+    private void bt_Ver_Proyectos_DesarolladorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Ver_Proyectos_DesarolladorMouseClicked
+        // TODO add your handling code here:
+        String projects="";
+        for (int i = 0; i < desarolladores.size(); i++) {
+            if (desarolladores.get(i).getCodigo_D()==Integer.parseInt(control)) {
+                projects+=""+desarolladores.get(i).getProject(i)+"\n";
+            }
+        }
+        JOptionPane.showMessageDialog(jd_Administradores, projects);
+        
+    }//GEN-LAST:event_bt_Ver_Proyectos_DesarolladorMouseClicked
+
+    private void bt_Bugs_FinalizadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Bugs_FinalizadosMouseClicked
+        // TODO add your handling code here:
+         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/mm/yyyy HH:mm:ss");
+        String comando="";
+        for (int i = 0; i < desarolladores.size(); i++) {
+            if (desarolladores.get(i).getCodigo_D()==Integer.parseInt(control)&& desarolladores.get(i).getReparar().getEstado().equalsIgnoreCase("asignado")) {
+            comando+=""+desarolladores.get(i).getReparar().getCodigo()+"\n";
+            }
+        }
+        
+        String fin=JOptionPane.showInputDialog(jd_Desarollador,comando+"\n Ingrese el codigo del bug a finalizar: ");
+       for (int i = 0; i < desarolladores.size(); i++) {
+            if (desarolladores.get(i).getCodigo_D()==Integer.parseInt(control)&& desarolladores.get(i).getReparar().getCodigo()==(Integer.parseInt(fin))) {
+            desarolladores.get(i).getReparar().setEstado("finalizado");
+            desarolladores.get(i).getReparar().setF_Finalizado(dtf.format(LocalDateTime.now()));
+            }
+        }
+    }//GEN-LAST:event_bt_Bugs_FinalizadosMouseClicked
+
+    private void bt_Asignar_Fecha_BugMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Asignar_Fecha_BugMouseClicked
+        // TODO add your handling code here:
+        String bug=JOptionPane.showInputDialog(jd_Desarollador,"Ingrese el codigo del bug a asignar fecha: ");
+        for (int i = 0; i < desarolladores.size(); i++) {
+            if (desarolladores.get(i).getCodigo_D()==Integer.parseInt(control)&& desarolladores.get(i).getReparar().getCodigo()==(Integer.parseInt(bug))) {
+                desarolladores.get(i).getReparar().setF_Inicio((Date)JOptionPane.showInputDialog(jd_Desarollador,"Ingrese la fecha de inicio de reparacion: "));
+            }
+        }
+        
+    }//GEN-LAST:event_bt_Asignar_Fecha_BugMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1063,9 +1164,11 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton B_BugInsertar;
     private javax.swing.JFrame BugFrame;
+    private javax.swing.JButton bt_Asignar_Fecha_Bug;
     private javax.swing.JButton bt_Borrar_Desarollador;
     private javax.swing.JButton bt_Borrar_Proyecto;
     private javax.swing.JButton bt_Bug_QA;
+    private javax.swing.JButton bt_Bugs_Finalizados;
     private javax.swing.JButton bt_CRUD_Desarollador;
     private javax.swing.JButton bt_CRUD_Software;
     private javax.swing.JButton bt_Cerrar_CRUD_Desarollador;
@@ -1081,6 +1184,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton bt_Salir_Admins;
     private javax.swing.JButton bt_Ver_Desarolladores;
     private javax.swing.JButton bt_Ver_Proyectos;
+    private javax.swing.JButton bt_Ver_Proyectos_Desarollador;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -1094,6 +1198,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JDialog jd_Administradores;
     private javax.swing.JDialog jd_CRUD_Desarollador;
     private javax.swing.JDialog jd_CRUD_Software;
+    private javax.swing.JDialog jd_Desarollador;
     private javax.swing.JDialog jd_QA;
     private javax.swing.JDialog jd_Ver_Desarollador;
     private javax.swing.JDialog jd_Ver_Projectos;
@@ -1130,6 +1235,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField text7;
     // End of variables declaration//GEN-END:variables
     static ArrayList<Usuarios> users = new ArrayList();
+    String control;
     static ArrayList<Desarollador> desarolladores = new ArrayList();
     static ArrayList<Bug> bugs = new ArrayList();
     static ArrayList<Proyecto_Software> softwares = new ArrayList();
