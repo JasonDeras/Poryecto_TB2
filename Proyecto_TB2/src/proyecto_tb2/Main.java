@@ -51,7 +51,6 @@ public class Main extends javax.swing.JFrame {
         bt_CRUD_Desarollador = new javax.swing.JButton();
         bt_Salir_Admins = new javax.swing.JButton();
         bt_Grafica_Circular = new javax.swing.JButton();
-        bt_Bug_Admin = new javax.swing.JButton();
         jd_CRUD_Software = new javax.swing.JDialog();
         jtf_Codigo_Proyecto = new javax.swing.JTextField();
         jtf_Nombre_Proyecto = new javax.swing.JTextField();
@@ -105,6 +104,8 @@ public class Main extends javax.swing.JFrame {
         bt_Borrar_Proyecto = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jt_Projectos_Software = new javax.swing.JTable();
+        jd_QA = new javax.swing.JDialog();
+        bt_Bug_QA = new javax.swing.JButton();
         jtf_Roll = new javax.swing.JTextField();
         bt_Login = new javax.swing.JButton();
         jpf_Contraseña = new javax.swing.JPasswordField();
@@ -141,8 +142,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        bt_Bug_Admin.setText("Bug");
-
         javax.swing.GroupLayout jd_AdministradoresLayout = new javax.swing.GroupLayout(jd_Administradores.getContentPane());
         jd_Administradores.getContentPane().setLayout(jd_AdministradoresLayout);
         jd_AdministradoresLayout.setHorizontalGroup(
@@ -150,7 +149,6 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jd_AdministradoresLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(jd_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bt_Bug_Admin)
                     .addComponent(bt_Grafica_Circular)
                     .addGroup(jd_AdministradoresLayout.createSequentialGroup()
                         .addComponent(bt_CRUD_Software)
@@ -165,9 +163,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jd_AdministradoresLayout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(bt_Grafica_Circular)
-                .addGap(18, 18, 18)
-                .addComponent(bt_Bug_Admin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
                 .addGroup(jd_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_CRUD_Software)
                     .addComponent(bt_CRUD_Desarollador)
@@ -598,17 +594,40 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        bt_Bug_QA.setText("Bug");
+        bt_Bug_QA.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_Bug_QAMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jd_QALayout = new javax.swing.GroupLayout(jd_QA.getContentPane());
+        jd_QA.getContentPane().setLayout(jd_QALayout);
+        jd_QALayout.setHorizontalGroup(
+            jd_QALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(jd_QALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jd_QALayout.createSequentialGroup()
+                    .addGap(173, 173, 173)
+                    .addComponent(bt_Bug_QA)
+                    .addContainerGap(174, Short.MAX_VALUE)))
+        );
+        jd_QALayout.setVerticalGroup(
+            jd_QALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(jd_QALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jd_QALayout.createSequentialGroup()
+                    .addGap(137, 137, 137)
+                    .addComponent(bt_Bug_QA)
+                    .addContainerGap(138, Short.MAX_VALUE)))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         bt_Login.setText("Login");
         bt_Login.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bt_LoginMouseClicked(evt);
-            }
-        });
-        bt_Login.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_LoginActionPerformed(evt);
             }
         });
 
@@ -691,7 +710,9 @@ public class Main extends javax.swing.JFrame {
                 jtf_Roll.setText("");
                 jpf_Contraseña.setText("");
                 jtf_Usuario.setText("");
-                System.out.println("qa");
+                jd_QA.setLocationRelativeTo(this);
+                jd_QA.setVisible(true);
+                jd_QA.setSize(250, 250);
             }
         }//Fim del for que hace las validaciones del usuario
     }//GEN-LAST:event_bt_LoginMouseClicked
@@ -818,13 +839,6 @@ public class Main extends javax.swing.JFrame {
             
         }//casos para las opciones para modificar el desarollador
     }//GEN-LAST:event_bt_Modificar_DesarolladorMouseClicked
-
-    private void bt_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_LoginActionPerformed
-        //BugFrame.setModal(true);
-        BugFrame.pack();
-        BugFrame.setLocationRelativeTo(this);
-        BugFrame.setVisible(true);
-    }//GEN-LAST:event_bt_LoginActionPerformed
 
     private void B_BugInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_BugInsertarActionPerformed
         try {
@@ -1003,6 +1017,13 @@ public class Main extends javax.swing.JFrame {
         frame.setSize(450, 500);
     }//GEN-LAST:event_bt_Grafica_CircularMouseClicked
 
+    private void bt_Bug_QAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Bug_QAMouseClicked
+        // TODO add your handling code here:
+        BugFrame.pack();
+        BugFrame.setLocationRelativeTo(this);
+        BugFrame.setVisible(true);
+    }//GEN-LAST:event_bt_Bug_QAMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1044,7 +1065,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JFrame BugFrame;
     private javax.swing.JButton bt_Borrar_Desarollador;
     private javax.swing.JButton bt_Borrar_Proyecto;
-    private javax.swing.JButton bt_Bug_Admin;
+    private javax.swing.JButton bt_Bug_QA;
     private javax.swing.JButton bt_CRUD_Desarollador;
     private javax.swing.JButton bt_CRUD_Software;
     private javax.swing.JButton bt_Cerrar_CRUD_Desarollador;
@@ -1073,6 +1094,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JDialog jd_Administradores;
     private javax.swing.JDialog jd_CRUD_Desarollador;
     private javax.swing.JDialog jd_CRUD_Software;
+    private javax.swing.JDialog jd_QA;
     private javax.swing.JDialog jd_Ver_Desarollador;
     private javax.swing.JDialog jd_Ver_Projectos;
     private javax.swing.JLabel jl_Codigo_Desarollador;

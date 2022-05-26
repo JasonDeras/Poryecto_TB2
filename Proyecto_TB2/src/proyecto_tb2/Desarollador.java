@@ -17,6 +17,9 @@ public class Desarollador {
     ArrayList<String>lenguajes=new ArrayList();
     ArrayList<String>tecnologias=new ArrayList();
     Bug reparar;
+     ArrayList<Proyecto_Software>proyectos=new ArrayList();
+
+    
 
     public Desarollador(int codigo_D, String nombre) {
         this.codigo_D = codigo_D;
