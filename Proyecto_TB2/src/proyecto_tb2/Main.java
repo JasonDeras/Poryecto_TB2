@@ -870,14 +870,28 @@ public class Main extends javax.swing.JFrame {
         jd_Ver_Desarollador.setLocationRelativeTo(this);
         jd_Ver_Desarollador.setVisible(true);
         jd_Ver_Desarollador.setSize(250, 250);
+        try {
 
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Codigo");
-        model.addColumn("Nombre");
-        for (int i = 0; i < desarolladores.size(); i++) {
-            model.addRow(new Object[]{"" + desarolladores.get(i).getCodigo_D(), "" + desarolladores.get(i).getNombre()});
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Codigo");
+            model.addColumn("Nombre");
+            String sql = "SELECT CODIGO_DESARR,NOMBRE_EMPLEADO FROM EQUIPO_DESARR";
+
+            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                model.addRow(new Object[]{"" + rs.getString("CODIGO_DESARR"), "" + rs.getString("NOMBRE_EMPLEADO")});
+            }
+            JOptionPane.showMessageDialog(null, "success");
+
+            jt_Desarolladores.setModel(model);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
         }
-        jt_Desarolladores.setModel(model);
+
+
     }//GEN-LAST:event_bt_Ver_DesarolladoresMouseClicked
 
     private void bt_Cerrar_Ver_DesarrolladorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Cerrar_Ver_DesarrolladorMouseClicked
@@ -1250,12 +1264,12 @@ public class Main extends javax.swing.JFrame {
         jd_Ver_Projectos.setLocationRelativeTo(this);
         jd_Ver_Projectos.setVisible(true);
         jd_Ver_Projectos.setSize(250, 250);
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Codigo Projecto");
-        model.addColumn("Nombre Projecto");
 
         try {
-            String sql = "SELECT CODIGO_PROYECTO, NOMBRE_PROYECTO FROM PROYECTO_SOFTWARE (CODIGO_PROYECTO, NOMBRE_PROYECTO, FECHAINICIO, FECHAFIN, EQUIPO_DESARR, LISTA_BUGS, LISTA_BUGS_FINALIZADOS)VALUES (?,?,?,?,?,?,?)";
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Codigo Projecto");
+            model.addColumn("Nombre Projecto");
+            String sql = "SELECT CODIGO_PROYECTO, NOMBRE_PROYECTO FROM PROYECTO_SOFTWARE";
 
             con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
             st = con.createStatement();
