@@ -1114,31 +1114,42 @@ public class Main extends javax.swing.JFrame {
 
     private void bt_Grafica_CircularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Grafica_CircularMouseClicked
         // TODO add your handling code here:
-        DefaultPieDataset datos = new DefaultPieDataset();
-        int asignados = 0;
-        int nuevos = 0;
-        int finalizados = 0;
-        for (int i = 0; i < bugs.size(); i++) {
-            bugs.get(i).getEstado();
-            if (bugs.get(i).getEstado().equalsIgnoreCase("nuevo")) {
-                nuevos++;
-            } else if (bugs.get(i).getEstado().equalsIgnoreCase("asignado")) {
-                asignados++;
-            } else if (bugs.get(i).getEstado().equalsIgnoreCase("finalizado")) {
-                finalizados++;
+        try {
+            DefaultPieDataset datos = new DefaultPieDataset();
+            int asignados = 0;
+            int nuevos = 0;
+            int finalizados = 0;
+
+            String sql = "SELECT ESTADO FROM BUG";
+
+            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                if (rs.getString("ESTADO").equalsIgnoreCase("nuevo")) {
+                    nuevos++;
+                } else if (rs.getString("ESTADO").equalsIgnoreCase("asignado")) {
+                    asignados++;
+                } else if (rs.getString("ESTADO").equalsIgnoreCase("finañizado")) {
+                    finalizados++;
+                }
             }
+            datos.setValue("Nuevos", nuevos);
+            datos.setValue("Asignados", asignados);
+            datos.setValue("Finalizados", finalizados);
+
+            JFreeChart chart = ChartFactory.createPieChart("Bugs", datos, true, true, true);
+            PiePlot p = (PiePlot) chart.getPlot();
+            ChartFrame frame = new ChartFrame("Grafico Circular de bugs", chart);
+            frame.setVisible(true);
+            frame.setSize(450, 500);
+
+            JOptionPane.showMessageDialog(null, "success");
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
         }
-
-        datos.setValue("Nuevos", nuevos);
-        datos.setValue("Asignados", asignados);
-        datos.setValue("Finalizados", finalizados);
-
-        JFreeChart chart = ChartFactory.createPieChart("Bugs", datos, true, true, true);
-        PiePlot p = (PiePlot) chart.getPlot();
-        //p.setForegroundAlpha(TOP_ALIGNMENT);
-        ChartFrame frame = new ChartFrame("Grafico Circular de bugs", chart);
-        frame.setVisible(true);
-        frame.setSize(450, 500);
     }//GEN-LAST:event_bt_Grafica_CircularMouseClicked
 
     private void bt_Bug_QAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Bug_QAMouseClicked
