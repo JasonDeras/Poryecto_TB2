@@ -1001,94 +1001,136 @@ public class Main extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jt_Projectos_Software.getModel();
         model.removeRow(jt_Projectos_Software.getSelectedRow());
         jt_Projectos_Software.setModel(model);
+        try {
+            String sql = "DELETE FROM PROYECTO_SOFTWARE WHERE CODIGO_PROYECTO=" + jt_Projectos_Software.getValueAt(jt_Projectos_Software.getSelectedRow(), 0).toString();
+            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
+            pst = con.prepareStatement(sql);
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "success");
+            softwares.add(new Proyecto_Software(Integer.parseInt(jtf_Codigo_Proyecto.getText()), jtf_Nombre_Proyecto.getText()));
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
     }//GEN-LAST:event_bt_Borrar_ProyectoMouseClicked
 
     private void bt_Modificar_ProyectoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Modificar_ProyectoMouseClicked
         // TODO add your handling code here:
-        String input;
-        input = JOptionPane.showInputDialog(jd_Ver_Projectos, "1. Cambiar Nombre\n2. Fecha Inicio\n3. Fecha Finalizacion\n4. Agregar Desarollador"
-                + "\n5. Agregar Bug\n Ingrese una opcion: ");
-        switch (input) {
-            case "1": {
-                String desa;
-                desa = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese el codigo del proyecto a cambiar nombre: ");
-                String asignar = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese el nuevo nombre: ");
-                for (int i = 0; i < softwares.size(); i++) {
-                    if (softwares.get(i).getCodigo_P() == Integer.parseInt(desa)) {
-                        softwares.get(i).setNombre_P(asignar);
-                    }
-                }
+        try {
+            String sql = "INSERT INTO PROYECTO_SOFTWARE (CODIGO_PROYECTO, NOMBRE_PROYECTO, FECHAINICIO, FECHAFIN, EQUIPO_DESARR, LISTA_BUGS, LISTA_BUGS_FINALIZADOS)VALUES (?,?,?,?,?,?,?)";
 
+            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
+            pst = con.prepareStatement(sql);
+            pst.executeUpdate();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        try {
+            String input;
+            input = JOptionPane.showInputDialog(jd_Ver_Projectos, "1. Cambiar Nombre\n2. Fecha Inicio\n3. Fecha Finalizacion\n4. Agregar Desarollador"
+                    + "\n5. Agregar Bug\n Ingrese una opcion: ");
+            switch (input) {
+                case "1": {
+                    String sql = "";
+                    String desa;
+                    desa = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese el codigo del proyecto a cambiar nombre: ");
+                    String asignar = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese el nuevo nombre: ");
+                    for (int i = 0; i < softwares.size(); i++) {
+                        if (softwares.get(i).getCodigo_P() == Integer.parseInt(desa)) {
+                            softwares.get(i).setNombre_P(asignar);
+                        }
+                    }
+                    sql = "UPDATE PROYECTO_SOFTWARE SET NOMBRE_PROYECTO='" + asignar + "' WHERE CODIGO_PROYECTO=" + desa;
+                    con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
+                    pst = con.prepareStatement(sql);
+                    pst.executeUpdate();
+                    break;
+                }
+                case "2": {
+                    String sql;
+                    String desa;
+                    String asignar;
+                    desa = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese el codigo del proyecto a cambiar la fecha de Inicio: ");
+
+                    asignar = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese nueva fecha inicio: ");
+                    sql = "UPDATE PROYECTO_SOFTWARE SET FECHAINICIO='" + asignar + "' WHERE CODIGO_PROYECTO=" + desa;
+                    for (int i = 0; i < softwares.size(); i++) {
+                        if (softwares.get(i).getCodigo_P() == Integer.parseInt(desa)) {
+                            softwares.get(i).setFecha_I(asignar);
+                        }
+                    }
+                    con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
+                    pst = con.prepareStatement(sql);
+                    pst.executeUpdate();
+                    break;
+                }
+                case "3": {
+                    String sql;
+                    String desa;
+                    String asignar;
+                    desa = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese el codigo del proyecto a cambiar la fecha de finalizacionn: ");
+
+                    asignar = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese nueva fecha finalizacion: ");
+                    sql = "UPDATE PROYECTO_SOFTWARE SET FECHAFIN='" + asignar + "' WHERE CODIGO_PROYECTO=" + desa;
+                    for (int i = 0; i < softwares.size(); i++) {
+                        if (softwares.get(i).getCodigo_P() == Integer.parseInt(desa)) {
+                            softwares.get(i).setFecha_F(asignar);
+                        }
+                    }
+                    con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
+                    pst = con.prepareStatement(sql);
+                    pst.executeUpdate();
+                }
                 break;
-            }
-            case "2": {
-                String desa;
-                String asignar;
-                desa = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese el codigo del proyecto a cambiar la fecha de Inicio: ");
-
-                asignar = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese nueva fecha inicio: ");
-
-                for (int i = 0; i < softwares.size(); i++) {
-                    if (softwares.get(i).getCodigo_P() == Integer.parseInt(desa)) {
-                        softwares.get(i).setFecha_I(asignar);
+                case "4": {
+                    String sql = "";
+                    String desa;
+                    String asignar;
+                    desa = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el codigo del proyecto a asignar el desarollador: ");
+                    String desarollador = "";
+                    for (int i = 0; i < desarolladores.size(); i++) {
+                        desarollador += "" + desarolladores.get(i).getCodigo_D() + "\n";
                     }
-                }
-                break;
-            }
-            case "3": {
-                String desa;
-                String asignar;
-                desa = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese el codigo del proyecto a cambiar la fecha de finalizacionn: ");
+                    asignar = JOptionPane.showInputDialog(jd_Ver_Desarollador, desarollador + "\nIngrese un desarollador a asignar");
 
-                asignar = JOptionPane.showInputDialog(jd_Ver_Projectos, "Ingrese nueva fecha finalizacion: ");
-
-                for (int i = 0; i < softwares.size(); i++) {
-                    if (softwares.get(i).getCodigo_P() == Integer.parseInt(desa)) {
-                        softwares.get(i).setFecha_F(asignar);
+                    for (int i = 0; i < softwares.size(); i++) {
+                        if (softwares.get(i).getCodigo_P() == Integer.parseInt(desa)) {
+                            softwares.get(i).addDesarollador(desarolladores.get(Integer.parseInt(asignar)));
+                        }
                     }
+                    sql = "UPDATE PROYECTO_SOFTWARE SET EQUIPO_DESARR='" + asignar + "' WHERE CODIGO_PROYECTO=" + desa;
+                    con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
+                    pst = con.prepareStatement(sql);
+                    pst.executeUpdate();
+                    break;
                 }
-            }
-            break;
-            case "4": {
-
-                String desa;
-                String asignar;
-                desa = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el codigo del proyecto a asignar el desarollador: ");
-                String desarollador = "";
-                for (int i = 0; i < desarolladores.size(); i++) {
-                    desarollador += "" + desarolladores.get(i).getCodigo_D() + "\n";
-                }
-                asignar = JOptionPane.showInputDialog(jd_Ver_Desarollador, desarollador + "\nIngrese un desarollador a asignar");
-
-                for (int i = 0; i < softwares.size(); i++) {
-                    if (softwares.get(i).getCodigo_P() == Integer.parseInt(desa)) {
-                        softwares.get(i).addDesarollador(desarolladores.get(Integer.parseInt(asignar)));
+                case "5": {
+                    String sql = "";
+                    String desa;
+                    String asignar;
+                    desa = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el codigo del proyecto a asignar el desarollador: ");
+                    String bug = "";
+                    for (int i = 0; i < bugs.size(); i++) {
+                        bug += "" + bugs.get(i).getCodigo() + "\n";
                     }
-                }
+                    asignar = JOptionPane.showInputDialog(jd_Ver_Desarollador, bug + "\nIngrese un bug a asignar");
 
-                break;
-            }
-            case "5": {
-
-                String desa;
-                String asignar;
-                desa = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el codigo del proyecto a asignar el desarollador: ");
-                String bug = "";
-                for (int i = 0; i < bugs.size(); i++) {
-                    bug += "" + bugs.get(i).getCodigo() + "\n";
-                }
-                asignar = JOptionPane.showInputDialog(jd_Ver_Desarollador, bug + "\nIngrese un bug a asignar");
-
-                for (int i = 0; i < softwares.size(); i++) {
-                    if (softwares.get(i).getCodigo_P() == Integer.parseInt(desa)) {
-                        softwares.get(i).addBugs(bugs.get(Integer.parseInt(asignar)));
+                    for (int i = 0; i < softwares.size(); i++) {
+                        if (softwares.get(i).getCodigo_P() == Integer.parseInt(desa)) {
+                            softwares.get(i).addBugs(bugs.get(Integer.parseInt(asignar)));
+                            sql = "UPDATE PROYECTO_SOFTWARE SET LISTA_BUGS='" + softwares.get(i).getBugs() + "' WHERE CODIGO_PROYECTO=" + desa;
+                        }
                     }
+                    con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
+                    pst = con.prepareStatement(sql);
+                    pst.executeUpdate();
+                    break;
                 }
-
-                break;
+                default:
+                    JOptionPane.showMessageDialog(jd_Ver_Projectos, "Opcion no valida");
             }
-            default:
-                JOptionPane.showMessageDialog(jd_Ver_Projectos, "Opcion no valida");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
         }
     }//GEN-LAST:event_bt_Modificar_ProyectoMouseClicked
 
