@@ -20,11 +20,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PiePlot;
-import org.jfree.data.general.DefaultPieDataset;
+//import org.jfree.chart.ChartFactory;
+//import org.jfree.chart.ChartFrame;
+//import org.jfree.chart.JFreeChart;
+//import org.jfree.chart.plot.PiePlot;
+//import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -75,9 +75,9 @@ public class Main extends javax.swing.JFrame {
         jtf_equipoDes_proyecto = new javax.swing.JTextField();
         jtf_listaBugs_proyecto = new javax.swing.JTextField();
         jtf_listaBugsFin_proyecto = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jl_Equipo_Desarollador = new javax.swing.JLabel();
+        jl_Lista_Bugs = new javax.swing.JLabel();
+        jl_Lista_Bugs_Finalizados = new javax.swing.JLabel();
         jd_CRUD_Desarollador = new javax.swing.JDialog();
         bt_Crear_Desarollador = new javax.swing.JButton();
         bt_Cerrar_CRUD_Desarollador = new javax.swing.JButton();
@@ -199,11 +199,6 @@ public class Main extends javax.swing.JFrame {
         jl_FechaF_Proyecto.setText("Fecha de Finalizacion");
 
         bt_Crear_Proyecto.setText("Crear");
-        bt_Crear_Proyecto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bt_Crear_ProyectoMouseClicked(evt);
-            }
-        });
         bt_Crear_Proyecto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_Crear_ProyectoActionPerformed(evt);
@@ -224,11 +219,11 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Equipo Desarrollo");
+        jl_Equipo_Desarollador.setText("Equipo Desarrollo");
 
-        jLabel3.setText("Lista de Bugs");
+        jl_Lista_Bugs.setText("Lista de Bugs");
 
-        jLabel4.setText("Lista de Bugs Fin");
+        jl_Lista_Bugs_Finalizados.setText("Lista de Bugs Fin");
 
         javax.swing.GroupLayout jd_CRUD_SoftwareLayout = new javax.swing.GroupLayout(jd_CRUD_Software.getContentPane());
         jd_CRUD_Software.getContentPane().setLayout(jd_CRUD_SoftwareLayout);
@@ -254,9 +249,9 @@ public class Main extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jd_CRUD_SoftwareLayout.createSequentialGroup()
                                 .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jl_FechaF_Proyecto)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
+                                    .addComponent(jl_Equipo_Desarollador)
+                                    .addComponent(jl_Lista_Bugs)
+                                    .addComponent(jl_Lista_Bugs_Finalizados))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jtf_listaBugs_proyecto)
@@ -294,15 +289,15 @@ public class Main extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtf_equipoDes_proyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jl_Equipo_Desarollador))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtf_listaBugs_proyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jl_Lista_Bugs))
                 .addGap(20, 20, 20)
                 .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtf_listaBugsFin_proyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jl_Lista_Bugs_Finalizados))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jd_CRUD_SoftwareLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_Crear_Proyecto)
@@ -312,11 +307,6 @@ public class Main extends javax.swing.JFrame {
         );
 
         bt_Crear_Desarollador.setText("Crear");
-        bt_Crear_Desarollador.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bt_Crear_DesarolladorMouseClicked(evt);
-            }
-        });
         bt_Crear_Desarollador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_Crear_DesarolladorActionPerformed(evt);
@@ -806,7 +796,8 @@ public class Main extends javax.swing.JFrame {
                 jtf_Usuario.setText("");
                 jd_Administradores.setLocationRelativeTo(this);
                 jd_Administradores.setVisible(true);
-                jd_Administradores.setSize(250, 250);
+                jd_Administradores.setTitle("Ventana Principal de desarolladores");
+                jd_Administradores.pack();
 
             } else if (usuario.equalsIgnoreCase(users.get(i).getCredenciales()) && clave.equals(users.get(i).getClave()) && rol.equalsIgnoreCase("desarollador")) {
                 control = usuario;
@@ -815,14 +806,16 @@ public class Main extends javax.swing.JFrame {
                 jtf_Usuario.setText("");
                 jd_Desarollador.setLocationRelativeTo(this);
                 jd_Desarollador.setVisible(true);
-                jd_Desarollador.setSize(250, 250);
+                jd_Desarollador.setTitle("Ventana Principal de desarollador");
+                jd_Desarollador.pack();
             } else if (usuario.equalsIgnoreCase(users.get(i).getCredenciales()) && clave.equals(users.get(i).getClave()) && rol.equalsIgnoreCase("qa")) {
                 jtf_Roll.setText("");
                 jpf_Contraseña.setText("");
                 jtf_Usuario.setText("");
                 jd_QA.setLocationRelativeTo(this);
                 jd_QA.setVisible(true);
-                jd_QA.setSize(250, 250);
+                jd_QA.setTitle("Ventana Principal de QA");
+                jd_QA.pack();
             }
         }//Fim del for que hace las validaciones del usuario
     }//GEN-LAST:event_bt_LoginMouseClicked
@@ -831,7 +824,8 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         jd_CRUD_Software.setLocationRelativeTo(this);
         jd_CRUD_Software.setVisible(true);
-        jd_CRUD_Software.setSize(250, 250);
+        jd_CRUD_Software.setTitle("CRUD de Software");
+        jd_CRUD_Software.pack();
     }//GEN-LAST:event_bt_CRUD_SoftwareMouseClicked
 
     private void bt_Cerrar_CRUD_DesarolladorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Cerrar_CRUD_DesarolladorMouseClicked
@@ -839,24 +833,12 @@ public class Main extends javax.swing.JFrame {
         jd_CRUD_Desarollador.setVisible(false);
     }//GEN-LAST:event_bt_Cerrar_CRUD_DesarolladorMouseClicked
 
-    private void bt_Crear_DesarolladorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Crear_DesarolladorMouseClicked
-        // TODO add your handling code here:
-        Desarollador de = new Desarollador(Integer.parseInt(jtf_Codigo_Desarollador.getText()), jtf_Nombre_Empleado.getText());
-        de.addLenguaje(jtf_Lenguaje_Domina.getText());
-        de.addTecnologia(jtf_Tecnologia_Domina.getText());
-        users.add(new Usuarios(jtf_Codigo_Desarollador.getText(), "123"));
-        desarolladores.add(de);
-        jtf_Codigo_Desarollador.setText("");
-        jtf_Nombre_Empleado.setText("");
-        jtf_Lenguaje_Domina.setText("");
-        jtf_Tecnologia_Domina.setText("");
-    }//GEN-LAST:event_bt_Crear_DesarolladorMouseClicked
-
     private void bt_CRUD_DesarolladorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_CRUD_DesarolladorMouseClicked
         // TODO add your handling code here:
         jd_CRUD_Desarollador.setLocationRelativeTo(this);
         jd_CRUD_Desarollador.setVisible(true);
-        jd_CRUD_Desarollador.setSize(250, 250);
+        jd_CRUD_Desarollador.setTitle("CRUD de Desarollador");
+        jd_CRUD_Desarollador.pack();
     }//GEN-LAST:event_bt_CRUD_DesarolladorMouseClicked
 
     private void bt_Salir_AdminsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Salir_AdminsMouseClicked
@@ -869,7 +851,8 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         jd_Ver_Desarollador.setLocationRelativeTo(this);
         jd_Ver_Desarollador.setVisible(true);
-        jd_Ver_Desarollador.setSize(250, 250);
+        jd_Ver_Desarollador.pack();
+        jd_Ver_Desarollador.setTitle("Ver Desarolladores");
         try {
 
             DefaultTableModel model = new DefaultTableModel();
@@ -905,63 +888,73 @@ public class Main extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jt_Desarolladores.getModel();
         model.removeRow(jt_Desarolladores.getSelectedRow());
         jt_Desarolladores.setModel(model);
+        try {
+            String sql = "DELETE FROM EQUIPO_DESARR WHERE CODIGO_DESARR=" + jt_Desarolladores.getValueAt(jt_Desarolladores.getSelectedRow(), 0).toString();
+
+            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
+
+            pst = con.prepareStatement(sql);
+            pst.executeUpdate();
+        } catch (Exception ex) {
+        }
     }//GEN-LAST:event_bt_Borrar_DesarolladorMouseClicked
 
     private void bt_Modificar_DesarolladorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Modificar_DesarolladorMouseClicked
         // TODO add your handling code here:
-        String input;
-        input = JOptionPane.showInputDialog(jd_Ver_Desarollador, "1. Asignar Bug\n2. Agregar Tecnologia\n3. Agregar Lenguaje\n Ingrese una opcion: ");
-        switch (input) {
-            case "1": {
-                String desa;
-                String asignar;
-                desa = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el codigo del desarollador a asignar el bug: ");
-                String bug = "";
-                for (int i = 0; i < bugs.size(); i++) {
-                    bug += "" + bugs.get(i).getCodigo() + "\n";
-                }
-                asignar = JOptionPane.showInputDialog(jd_Ver_Desarollador, bug + "\nIngrese un bug a asignar");
+        try {
+            String input;
+            input = JOptionPane.showInputDialog(jd_Ver_Desarollador, "1. Agregar Tecnologia\n2. Agregar Lenguaje\n Ingrese una opcion: ");
+            switch (input) {
 
-                for (int i = 0; i < desarolladores.size(); i++) {
-                    if (desarolladores.get(i).getCodigo_D() == Integer.parseInt(desa)) {
-                        desarolladores.get(i).setReparar(bugs.get(Integer.parseInt(asignar)));
+                case "1": {
+                    String desa;
+                    String asignar;
+                    desa = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el codigo del desarollador a agregar la tecnologia: ");
+                    asignar = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese la tecnologia a agregar: ");
+                    String sql = "";
+                    for (int i = 0; i < desarolladores.size(); i++) {
+                        if (desarolladores.get(i).getCodigo_D() == Integer.parseInt(desa)) {
+                            desarolladores.get(i).addTecnologia(asignar);
+                            sql = "UPDATE EQUIPO_DESARR SET TECNOLOGIAS_DOMINA='" + desarolladores.get(i).getTecnologias() + "' WHERE CODIGO_DESARR=" + desa;
+                        }
                     }
-                }
+                    con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
 
+                    pst = con.prepareStatement(sql);
+
+                    pst.executeUpdate();
+                    break;
+                }
+                case "2": {
+                    String desa;
+                    String asignar;
+                    desa = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el codigo del desarollador a agregar el lenguaje: ");
+                    String sql = "";
+                    asignar = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el lenguaje a agregar: ");
+
+                    for (int i = 0; i < desarolladores.size(); i++) {
+                        if (desarolladores.get(i).getCodigo_D() == Integer.parseInt(desa)) {
+                            desarolladores.get(i).addLenguaje(asignar);
+                            sql = "UPDATE EQUIPO_DESARR SET LENGUAJES_PROGRA_MANEJA='" + desarolladores.get(i).getLenguajes() + "' WHERE CODIGO_DESARR=" + desa;
+                        }
+                    }
+                    con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
+
+                    pst = con.prepareStatement(sql);
+
+                    pst.executeUpdate();
+                }
                 break;
-            }
-            case "2": {
-                String desa;
-                String asignar;
-                desa = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el codigo del desarollador a agregar la tecnologia: ");
+                default:
+                    JOptionPane.showMessageDialog(jd_Ver_Desarollador, "Opcion no valida");
 
-                asignar = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese la tecnologia a agregar: ");
+            }//casos para las opciones para modificar el desarollador
 
-                for (int i = 0; i < desarolladores.size(); i++) {
-                    if (desarolladores.get(i).getCodigo_D() == Integer.parseInt(desa)) {
-                        desarolladores.get(i).addTecnologia(asignar);
-                    }
-                }
-                break;
-            }
-            case "3": {
-                String desa;
-                String asignar;
-                desa = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el codigo del desarollador a agregar ellenguaje: ");
+            JOptionPane.showMessageDialog(null, "success");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
 
-                asignar = JOptionPane.showInputDialog(jd_Ver_Desarollador, "Ingrese el lenguaje a agregar: ");
-
-                for (int i = 0; i < desarolladores.size(); i++) {
-                    if (desarolladores.get(i).getCodigo_D() == Integer.parseInt(desa)) {
-                        desarolladores.get(i).addLenguaje(asignar);
-                    }
-                }
-            }
-            break;
-            default:
-                JOptionPane.showMessageDialog(jd_Ver_Desarollador, "Opcion no valida");
-
-        }//casos para las opciones para modificar el desarollador
     }//GEN-LAST:event_bt_Modificar_DesarolladorMouseClicked
 
     private void B_BugInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_BugInsertarActionPerformed
@@ -996,19 +989,6 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
     }//GEN-LAST:event_B_BugInsertarActionPerformed
-
-    private void bt_Crear_ProyectoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Crear_ProyectoMouseClicked
-        // TODO add your handling code here:
-        int codigo_P = Integer.parseInt(jtf_Codigo_Proyecto.getText());
-        String nombre_P = jtf_Nombre_Proyecto.getText();
-        String fecha_I = jtf_FechaI_Proyecto.getText();
-        String fecha_F = jtf_FechaF_Proyecto.getText();
-        softwares.add(new Proyecto_Software(codigo_P, nombre_P, fecha_I, fecha_F));
-        jtf_Codigo_Proyecto.setText("");
-        jtf_Nombre_Proyecto.setText("");
-        jtf_FechaI_Proyecto.setText("");
-        jtf_FechaF_Proyecto.setText("");
-    }//GEN-LAST:event_bt_Crear_ProyectoMouseClicked
 
     private void bt_Cerrar_ProyectosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Cerrar_ProyectosMouseClicked
         // TODO add your handling code here:
@@ -1366,9 +1346,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JDialog jd_Administradores;
@@ -1381,9 +1358,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jl_Codigo_Desarollador;
     private javax.swing.JLabel jl_Codigo_Proyecto;
     private javax.swing.JLabel jl_Contraseña;
+    private javax.swing.JLabel jl_Equipo_Desarollador;
     private javax.swing.JLabel jl_FechaF_Proyecto;
     private javax.swing.JLabel jl_Fecha_Inicio;
     private javax.swing.JLabel jl_Lengauaje_Domina;
+    private javax.swing.JLabel jl_Lista_Bugs;
+    private javax.swing.JLabel jl_Lista_Bugs_Finalizados;
     private javax.swing.JLabel jl_Nombre_Desarollador;
     private javax.swing.JLabel jl_Nombre_Proyecto;
     private javax.swing.JLabel jl_Rol;
