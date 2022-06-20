@@ -733,7 +733,7 @@ public class Main extends javax.swing.JFrame {
 
         jl_Contraseña.setText("Ingrese su contraseña");
 
-        jl_Usuario.setText("Ingrese su usario");
+        jl_Usuario.setText("Ingrese su correo");
 
         jbt_Crear_Usuario.setText("Crear Usuario");
         jbt_Crear_Usuario.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -801,7 +801,7 @@ public class Main extends javax.swing.JFrame {
         clave = jpf_Contraseña.getText();
         usuario = jtf_Usuario.getText();
         for (int i = 0; i < users.size(); i++) {
-            if (usuario.equalsIgnoreCase(users.get(i).getCredenciales()) && clave.equals(users.get(i).getClave()) && rol.equalsIgnoreCase("administrador")) {
+            if (usuario.equalsIgnoreCase(users.get(i).getCorreo()) && clave.equals(users.get(i).getContraseña()) && rol.equalsIgnoreCase("administrador")) {
                 jtf_Roll.setText("");
                 jpf_Contraseña.setText("");
                 jtf_Usuario.setText("");
@@ -810,7 +810,7 @@ public class Main extends javax.swing.JFrame {
                 jd_Administradores.setTitle("Ventana Principal de desarolladores");
                 jd_Administradores.pack();
 
-            } else if (usuario.equalsIgnoreCase(users.get(i).getCredenciales()) && clave.equals(users.get(i).getClave()) && rol.equalsIgnoreCase("desarollador")) {
+            } else if (usuario.equalsIgnoreCase(users.get(i).getCorreo()) && clave.equals(users.get(i).getContraseña()) && rol.equalsIgnoreCase("desarollador")) {
                 control = usuario;
                 jtf_Roll.setText("");
                 jpf_Contraseña.setText("");
@@ -819,7 +819,7 @@ public class Main extends javax.swing.JFrame {
                 jd_Desarollador.setVisible(true);
                 jd_Desarollador.setTitle("Ventana Principal de desarollador");
                 jd_Desarollador.pack();
-            } else if (usuario.equalsIgnoreCase(users.get(i).getCredenciales()) && clave.equals(users.get(i).getClave()) && rol.equalsIgnoreCase("qa")) {
+            } else if (usuario.equalsIgnoreCase(users.get(i).getCorreo()) && clave.equals(users.get(i).getContraseña()) && rol.equalsIgnoreCase("qa")) {
                 jtf_Roll.setText("");
                 jpf_Contraseña.setText("");
                 jtf_Usuario.setText("");

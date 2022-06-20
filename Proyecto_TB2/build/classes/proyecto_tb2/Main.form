@@ -947,7 +947,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jl_Usuario">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ingrese su usario"/>
+        <Property name="text" type="java.lang.String" value="Ingrese su correo"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtf_Usuario">
