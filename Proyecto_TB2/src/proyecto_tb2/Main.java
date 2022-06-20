@@ -132,6 +132,7 @@ public class Main extends javax.swing.JFrame {
         jl_Contraseña = new javax.swing.JLabel();
         jl_Usuario = new javax.swing.JLabel();
         jtf_Usuario = new javax.swing.JTextField();
+        jbt_Crear_Usuario = new javax.swing.JButton();
 
         bt_CRUD_Software.setText("CRUD Sofware");
         bt_CRUD_Software.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -734,6 +735,13 @@ public class Main extends javax.swing.JFrame {
 
         jl_Usuario.setText("Ingrese su usario");
 
+        jbt_Crear_Usuario.setText("Crear Usuario");
+        jbt_Crear_Usuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbt_Crear_UsuarioMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -746,7 +754,8 @@ public class Main extends javax.swing.JFrame {
                         .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jl_Usuario)
-                            .addComponent(jl_Rol))))
+                            .addComponent(jl_Rol)))
+                    .addComponent(jbt_Crear_Usuario))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -774,7 +783,9 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jpf_Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jl_Contraseña))
                 .addGap(18, 18, 18)
-                .addComponent(bt_Login)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_Login)
+                    .addComponent(jbt_Crear_Usuario))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
 
@@ -984,7 +995,7 @@ public class Main extends javax.swing.JFrame {
             text5.setText("");
             text6.setText("");
             text7.setText("");
-
+            bugs.add(new Bug(Integer.parseInt(text1.getText()), text2.getText(), Integer.parseInt(text3.getText()), Integer.parseInt(text4.getText()), text5.getText(), text6.getText(), text7.getText())
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -1320,6 +1331,14 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bt_Ver_ProyectosMouseClicked
 
+    private void jbt_Crear_UsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbt_Crear_UsuarioMouseClicked
+        // TODO add your handling code here:
+        String usario = JOptionPane.showInputDialog(this, "Ingrese el nuevo usuario: ");
+        String rol = JOptionPane.showInputDialog(this, "Ingrese el rol: ");
+        String contraseña = JOptionPane.showInputDialog(this, "Ingrese la contraseña: ");
+        users.add(new Usuario(rol, usario, contraseña));
+    }//GEN-LAST:event_jbt_Crear_UsuarioMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1390,6 +1409,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton jbt_Crear_Usuario;
     private javax.swing.JDialog jd_Administradores;
     private javax.swing.JDialog jd_CRUD_Desarollador;
     private javax.swing.JDialog jd_CRUD_Software;
@@ -1435,15 +1455,15 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField text6;
     private javax.swing.JTextField text7;
     // End of variables declaration//GEN-END:variables
-    static ArrayList<Usuarios> users = new ArrayList();
+    static ArrayList<Usuario> users = new ArrayList();
     String control;
     static ArrayList<Desarollador> desarolladores = new ArrayList();
     static ArrayList<Bug> bugs = new ArrayList();
     static ArrayList<Proyecto_Software> softwares = new ArrayList();
 
     public static void agregar_pre() {
-        users.add(new Usuarios("administrador", "123"));
-        users.add(new Usuarios("desarollador", "456"));
-        users.add(new Usuarios("qa", "789"));
+        users.add(new Usuario("administrador", "administrador@gmail.com", "123"));
+        users.add(new Usuario("desarollador", "desarollador@gmail.com", "456"));
+        users.add(new Usuario("qa", "qa@gmail.com", "789"));
     }
 }

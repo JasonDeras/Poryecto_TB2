@@ -18,11 +18,11 @@ public class Bug {
     int CP_Software;
     int urgencia;//1..5;
     String estado;
-    Date F_Inicio;
-    Date F_Finalizado;
+    String F_Inicio;
+    String F_Finalizado;
     ArrayList <String> comentarios =new ArrayList();
 
-    public Bug(int codigo, String descripcion, int CP_Software, int urgencia, String estado, Date F_Inicio, Date F_Finalizado) {
+    public Bug(int codigo, String descripcion, int CP_Software, int urgencia, String estado, String F_Inicio, String F_Finalizado) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.CP_Software = CP_Software;
@@ -72,19 +72,19 @@ public class Bug {
         this.estado = estado;
     }
 
-    public Date getF_Inicio() {
+    public String getF_Inicio() {
         return F_Inicio;
     }
 
-    public void setF_Inicio(Date F_Inicio) {
+    public void setF_Inicio(String F_Inicio) {
         this.F_Inicio = F_Inicio;
     }
 
-    public Date getF_Finalizado() {
+    public String getF_Finalizado() {
         return F_Finalizado;
     }
 
-    public void setF_Finalizado(Date F_Finalizado) {
+    public void setF_Finalizado(String F_Finalizado) {
         this.F_Finalizado = F_Finalizado;
     }
     

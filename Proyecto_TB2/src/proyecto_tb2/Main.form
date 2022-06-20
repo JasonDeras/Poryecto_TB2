@@ -877,6 +877,7 @@
                           <Component id="jl_Rol" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="jbt_Crear_Usuario" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -912,7 +913,10 @@
                   <Component id="jl_Contraseña" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="bt_Login" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="bt_Login" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbt_Crear_Usuario" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="74" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -947,6 +951,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtf_Usuario">
+    </Component>
+    <Component class="javax.swing.JButton" name="jbt_Crear_Usuario">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Crear Usuario"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbt_Crear_UsuarioMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
