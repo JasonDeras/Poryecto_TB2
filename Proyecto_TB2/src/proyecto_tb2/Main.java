@@ -995,7 +995,7 @@ public class Main extends javax.swing.JFrame {
             text5.setText("");
             text6.setText("");
             text7.setText("");
-            bugs.add(new Bug(Integer.parseInt(text1.getText()), text2.getText(), Integer.parseInt(text3.getText()), Integer.parseInt(text4.getText()), text5.getText(), text6.getText(), text7.getText())
+            bugs.add(new Bug(Integer.parseInt(text1.getText()), text2.getText(), Integer.parseInt(text3.getText()), Integer.parseInt(text4.getText()), text5.getText()));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
