@@ -1016,20 +1016,27 @@ public class Main extends javax.swing.JFrame {
 
     private void bt_Borrar_ProyectoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Borrar_ProyectoMouseClicked
         // TODO add your handling code here:
-        softwares.remove(jt_Projectos_Software.getSelectedRow());
-        DefaultTableModel model = (DefaultTableModel) jt_Projectos_Software.getModel();
-        model.removeRow(jt_Projectos_Software.getSelectedRow());
-        jt_Projectos_Software.setModel(model);
         try {
-            String sql = "DELETE FROM PROYECTO_SOFTWARE WHERE CODIGO_PROYECTO=" + jt_Projectos_Software.getValueAt(jt_Projectos_Software.getSelectedRow(), 0).toString();
-            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
-            pst = con.prepareStatement(sql);
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(null, "success");
-            softwares.add(new Proyecto_Software(Integer.parseInt(jtf_Codigo_Proyecto.getText()), jtf_Nombre_Proyecto.getText()));
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            int filaSelec = jt_Projectos_Software.getSelectedRow();
+            String cambio = jt_Projectos_Software.getValueAt(filaSelec, 0).toString();
+            try {
+                String sql = "DELETE FROM PROYECTO_SOFTWARE WHERE CODIGO_PROYECTO=" + cambio;
+                con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
+                pst = con.prepareStatement(sql);
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "success");
+                softwares.add(new Proyecto_Software(Integer.parseInt(jtf_Codigo_Proyecto.getText()), jtf_Nombre_Proyecto.getText()));
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
+
+            softwares.remove(jt_Projectos_Software.getSelectedRow());
+            DefaultTableModel model = (DefaultTableModel) jt_Projectos_Software.getModel();
+            model.removeRow(jt_Projectos_Software.getSelectedRow());
+            jt_Projectos_Software.setModel(model);
+        } catch (Exception e) {
         }
+
     }//GEN-LAST:event_bt_Borrar_ProyectoMouseClicked
 
     private void bt_Modificar_ProyectoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Modificar_ProyectoMouseClicked
@@ -1172,7 +1179,7 @@ public class Main extends javax.swing.JFrame {
                     nuevos++;
                 } else if (rs.getString("ESTADO").equalsIgnoreCase("asignado")) {
                     asignados++;
-                } else if (rs.getString("ESTADO").equalsIgnoreCase("finañizado")) {
+                } else if (rs.getString("ESTADO").equalsIgnoreCase("finalizado")) {
                     finalizados++;
                 }
             }
