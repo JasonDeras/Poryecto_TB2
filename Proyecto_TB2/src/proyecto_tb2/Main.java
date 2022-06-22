@@ -895,10 +895,6 @@ public class Main extends javax.swing.JFrame {
 
     private void bt_Borrar_DesarolladorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Borrar_DesarolladorMouseClicked
         // TODO add your handling code here:
-        desarolladores.remove(jt_Desarolladores.getSelectedRow());
-        DefaultTableModel model = (DefaultTableModel) jt_Desarolladores.getModel();
-        model.removeRow(jt_Desarolladores.getSelectedRow());
-        jt_Desarolladores.setModel(model);
         try {
             String sql = "DELETE FROM EQUIPO_DESARR WHERE CODIGO_DESARR=" + jt_Desarolladores.getValueAt(jt_Desarolladores.getSelectedRow(), 0).toString();
 
@@ -908,6 +904,12 @@ public class Main extends javax.swing.JFrame {
             pst.executeUpdate();
         } catch (Exception ex) {
         }
+        
+        desarolladores.remove(jt_Desarolladores.getSelectedRow());
+        DefaultTableModel model = (DefaultTableModel) jt_Desarolladores.getModel();
+        model.removeRow(jt_Desarolladores.getSelectedRow());
+        jt_Desarolladores.setModel(model);
+        
     }//GEN-LAST:event_bt_Borrar_DesarolladorMouseClicked
 
     private void bt_Modificar_DesarolladorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Modificar_DesarolladorMouseClicked
