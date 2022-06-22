@@ -896,20 +896,26 @@ public class Main extends javax.swing.JFrame {
     private void bt_Borrar_DesarolladorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Borrar_DesarolladorMouseClicked
         // TODO add your handling code here:
         try {
-            String sql = "DELETE FROM EQUIPO_DESARR WHERE CODIGO_DESARR=" + jt_Desarolladores.getValueAt(jt_Desarolladores.getSelectedRow(), 0).toString();
+            int filaSelec = jt_Desarolladores.getSelectedRow();
+            String cambio = jt_Desarolladores.getValueAt(filaSelec, 0).toString();
+            try {
+                String sql = "DELETE FROM EQUIPO_DESARR WHERE CODIGO_DESARR=" + cambio;
 
-            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
+                con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
 
-            pst = con.prepareStatement(sql);
-            pst.executeUpdate();
-        } catch (Exception ex) {
+                pst = con.prepareStatement(sql);
+                pst.executeUpdate();
+            } catch (Exception ex) {
+            }
+
+            desarolladores.remove(jt_Desarolladores.getSelectedRow());
+            DefaultTableModel model = (DefaultTableModel) jt_Desarolladores.getModel();
+            model.removeRow(jt_Desarolladores.getSelectedRow());
+            jt_Desarolladores.setModel(model);
+        } catch (Exception e) {
         }
-        
-        desarolladores.remove(jt_Desarolladores.getSelectedRow());
-        DefaultTableModel model = (DefaultTableModel) jt_Desarolladores.getModel();
-        model.removeRow(jt_Desarolladores.getSelectedRow());
-        jt_Desarolladores.setModel(model);
-        
+
+
     }//GEN-LAST:event_bt_Borrar_DesarolladorMouseClicked
 
     private void bt_Modificar_DesarolladorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Modificar_DesarolladorMouseClicked
