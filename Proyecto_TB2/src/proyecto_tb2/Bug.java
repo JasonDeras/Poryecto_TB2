@@ -6,6 +6,7 @@
 package proyecto_tb2;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,15 +20,14 @@ public class Bug {
     String estado;
     Date F_Inicio;
     Date F_Finalizado;
+    ArrayList <String> comentarios =new ArrayList();
 
-    public Bug(int codigo, String descripcion, int CP_Software, int urgencia, String estado, Date F_Inicio, Date F_Finalizado) {
+    public Bug(int codigo, String descripcion, int CP_Software, int urgencia, String estado) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.CP_Software = CP_Software;
         this.urgencia = urgencia;
         this.estado = estado;
-        this.F_Inicio = F_Inicio;
-        this.F_Finalizado = F_Finalizado;
     }
 
     public int getCodigo() {
