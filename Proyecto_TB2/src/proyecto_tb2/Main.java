@@ -157,6 +157,14 @@ public class Main extends javax.swing.JFrame {
         jd_Ver_Bugs = new javax.swing.JDialog();
         jScrollPane5 = new javax.swing.JScrollPane();
         jt_Bugs = new javax.swing.JTable();
+        jd_Usuarios = new javax.swing.JDialog();
+        jtf_correo = new javax.swing.JTextField();
+        jtf_rol = new javax.swing.JTextField();
+        jtf_contraseña = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        crear_usuario = new javax.swing.JButton();
         jtf_Roll = new javax.swing.JTextField();
         bt_Login = new javax.swing.JButton();
         jpf_Contraseña = new javax.swing.JPasswordField();
@@ -940,6 +948,64 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jLabel4.setText("Correo");
+
+        jLabel5.setText("Contraseña");
+
+        jLabel6.setText("Rol");
+
+        crear_usuario.setText("Crear");
+        crear_usuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                crear_usuarioMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jd_UsuariosLayout = new javax.swing.GroupLayout(jd_Usuarios.getContentPane());
+        jd_Usuarios.getContentPane().setLayout(jd_UsuariosLayout);
+        jd_UsuariosLayout.setHorizontalGroup(
+            jd_UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_UsuariosLayout.createSequentialGroup()
+                .addGroup(jd_UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_UsuariosLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(jd_UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
+                        .addGroup(jd_UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtf_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtf_rol, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtf_correo, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jd_UsuariosLayout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addComponent(crear_usuario)))
+                .addContainerGap(69, Short.MAX_VALUE))
+        );
+        jd_UsuariosLayout.setVerticalGroup(
+            jd_UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_UsuariosLayout.createSequentialGroup()
+                .addGroup(jd_UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_UsuariosLayout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5))
+                    .addGroup(jd_UsuariosLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jtf_correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtf_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jd_UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtf_rol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addComponent(crear_usuario)
+                .addGap(24, 24, 24))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         bt_Login.setText("Login");
@@ -1559,11 +1625,9 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_Ver_ProyectosMouseClicked
 
     private void jbt_Crear_UsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbt_Crear_UsuarioMouseClicked
-        // TODO add your handling code here:
-        String usario = JOptionPane.showInputDialog(this, "Ingrese el nuevo usuario: ");
-        String rol = JOptionPane.showInputDialog(this, "Ingrese el rol: ");
-        String contraseña = JOptionPane.showInputDialog(this, "Ingrese la contraseña: ");
-        users.add(new Usuario(rol, usario, contraseña));
+        jd_Usuarios.setLocationRelativeTo(this);
+        jd_Usuarios.setVisible(true);
+        jd_Usuarios.pack();
     }//GEN-LAST:event_jbt_Crear_UsuarioMouseClicked
 
     private void comentarios_qaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comentarios_qaMouseClicked
@@ -1654,6 +1718,33 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbt_Crear_ReporteMouseClicked
 
+    private void crear_usuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crear_usuarioMouseClicked
+        try {
+            String sql = "INSERT INTO USUARIO (CORREO, CONTRASEÑA, ROL)VALUES (?,?,?)";
+
+            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
+
+            pst = con.prepareStatement(sql);
+
+            pst.setString(1, jtf_correo.getText());
+            pst.setString(2, jtf_contraseña.getText());
+            pst.setString(3, jtf_rol.getText());
+
+            pst.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "success");
+
+            users.add(new Usuario(jtf_correo.getText(), jtf_contraseña.getText(), jtf_rol.getText()));
+
+            jtf_correo.setText("");
+            jtf_contraseña.setText("");
+            jtf_rol.setText("");
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_crear_usuarioMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1717,6 +1808,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton bt_comentar_desarr;
     private javax.swing.JButton bt_comentar_qa;
     private javax.swing.JButton comentarios_qa;
+    private javax.swing.JButton crear_usuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -1727,6 +1819,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1743,6 +1838,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JDialog jd_CRUD_Software;
     private javax.swing.JDialog jd_Desarollador;
     private javax.swing.JDialog jd_QA;
+    private javax.swing.JDialog jd_Usuarios;
     private javax.swing.JDialog jd_Ver_Bugs;
     private javax.swing.JDialog jd_Ver_Desarollador;
     private javax.swing.JDialog jd_Ver_Projectos;
@@ -1776,9 +1872,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField jtf_Roll;
     private javax.swing.JTextField jtf_Tecnologia_Domina;
     private javax.swing.JTextField jtf_Usuario;
+    private javax.swing.JTextField jtf_contraseña;
+    private javax.swing.JTextField jtf_correo;
     private javax.swing.JTextField jtf_equipoDes_proyecto;
     private javax.swing.JTextField jtf_listaBugsFin_proyecto;
     private javax.swing.JTextField jtf_listaBugs_proyecto;
+    private javax.swing.JTextField jtf_rol;
     private javax.swing.JTextField text1;
     private javax.swing.JTextField text2;
     private javax.swing.JTextField text3;
