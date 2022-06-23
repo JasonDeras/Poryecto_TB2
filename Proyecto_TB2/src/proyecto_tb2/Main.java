@@ -1135,6 +1135,7 @@ public class Main extends javax.swing.JFrame {
 
     private void bt_LoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_LoginMouseClicked
         // TODO add your handling code here:
+        agregar_pre();
         String rol;
         String clave;
         String usuario;
@@ -1563,16 +1564,16 @@ public class Main extends javax.swing.JFrame {
         }
 
         String fin = JOptionPane.showInputDialog(jd_Desarollador, comando + "\n Ingrese el codigo del bug a finalizar: ");
-        for (int i = 0; i < desarolladores.size(); i++) {
-            if (desarolladores.get(i).getCodigo_D() == Integer.parseInt(control) && desarolladores.get(i).getReparar().getCodigo() == (Integer.parseInt(fin))) {
-                desarolladores.get(i).getReparar().setEstado("finalizado");
-                try {
-                    desarolladores.get(i).getReparar().setF_Finalizado((Date) new SimpleDateFormat("dd/mm/yyy").parse(dtf.format(LocalDateTime.now())));
-                } catch (ParseException ex) {
-                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+       
+        try {
+             String sql = "UPDATE BUG SET ESTADO='FINALIZADO' WHERE CODIGO="+fin;
+             con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
+             pst = con.prepareStatement(sql);
+             pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_bt_Bugs_FinalizadosMouseClicked
 
     private void bt_Asignar_Fecha_BugMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Asignar_Fecha_BugMouseClicked
@@ -1823,7 +1824,7 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "success");
 
             jt_Ver_Usuarios.setModel(model);
-        } catch (HeadlessException | SQLException ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }//GEN-LAST:event_jbt_Ver_UsuariosMouseClicked
@@ -1992,12 +1993,12 @@ public class Main extends javax.swing.JFrame {
             while (rs.next()) {
                 users.add(new Usuario(rs.getString("ROL"), rs.getString("CORREO"), rs.getString("CONTRASEÑA")));
             }
-            users.add(new Usuario("administrador", "administrador@gmail.com", "456"));
-            users.add(new Usuario("qa", "qa@gmail.com", "123"));
-            users.add(new Usuario("desarollador", "desarollador@gmail.com", "789"));
             JOptionPane.showMessageDialog(null, "success");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
+      users.add(new Usuario("administrador", "administrador@gmail.com", "456"));
+            users.add(new Usuario("qa", "qa@gmail.com", "123"));
+            users.add(new Usuario("desarollador", "desarollador@gmail.com", "789"));
     }
 }
