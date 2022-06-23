@@ -5,6 +5,17 @@
  */
 package proyecto_tb2;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfDocument;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Font;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
@@ -20,11 +31,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PiePlot;
-import org.jfree.data.general.DefaultPieDataset;
+//import org.jfree.chart.ChartFactory;
+//import org.jfree.chart.ChartFrame;
+//import org.jfree.chart.JFreeChart;
+//import org.jfree.chart.plot.PiePlot;
+//import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -124,6 +135,7 @@ public class Main extends javax.swing.JFrame {
         bt_Bug_QA = new javax.swing.JButton();
         comentarios_qa = new javax.swing.JButton();
         jbt_Ver_Bugs = new javax.swing.JButton();
+        jbt_Crear_Reporte = new javax.swing.JButton();
         jd_Desarollador = new javax.swing.JDialog();
         bt_Ver_Proyectos_Desarollador = new javax.swing.JButton();
         bt_Bugs_Finalizados = new javax.swing.JButton();
@@ -699,6 +711,13 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jbt_Crear_Reporte.setText("Crear Reporte");
+        jbt_Crear_Reporte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbt_Crear_ReporteMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jd_QALayout = new javax.swing.GroupLayout(jd_QA.getContentPane());
         jd_QA.getContentPane().setLayout(jd_QALayout);
         jd_QALayout.setHorizontalGroup(
@@ -706,13 +725,15 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jd_QALayout.createSequentialGroup()
                 .addGap(168, 168, 168)
                 .addGroup(jd_QALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbt_Ver_Bugs)
                     .addGroup(jd_QALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(comentarios_qa)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_QALayout.createSequentialGroup()
                             .addComponent(bt_Bug_QA)
-                            .addGap(16, 16, 16))))
-                .addContainerGap(153, Short.MAX_VALUE))
+                            .addGap(16, 16, 16)))
+                    .addGroup(jd_QALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jbt_Crear_Reporte)
+                        .addComponent(jbt_Ver_Bugs)))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
         jd_QALayout.setVerticalGroup(
             jd_QALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -723,7 +744,9 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(comentarios_qa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(jbt_Ver_Bugs)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbt_Crear_Reporte)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         bt_Ver_Proyectos_Desarollador.setText("Ver Proyectos");
@@ -1008,7 +1031,6 @@ public class Main extends javax.swing.JFrame {
                 jd_Administradores.pack();
 
             } else if (usuario.equalsIgnoreCase(users.get(i).getCorreo()) && clave.equals(users.get(i).getContraseña()) && rol.equalsIgnoreCase("desarollador")) {
-                control = usuario;
                 jtf_Roll.setText("");
                 jpf_Contraseña.setText("");
                 jtf_Usuario.setText("");
@@ -1024,6 +1046,7 @@ public class Main extends javax.swing.JFrame {
                 jd_QA.setVisible(true);
                 jd_QA.setTitle("Ventana Principal de QA");
                 jd_QA.pack();
+                qa.setCodigo(usuario);
             }
         }//Fim del for que hace las validaciones del usuario
     }//GEN-LAST:event_bt_LoginMouseClicked
@@ -1200,7 +1223,7 @@ public class Main extends javax.swing.JFrame {
             text5.setText("");
             text6.setText("");
             text7.setText("");
-            bugs.add(new Bug(Integer.parseInt(text1.getText()), text2.getText(), Integer.parseInt(text3.getText()), Integer.parseInt(text4.getText()), text5.getText()));
+            bugs.add(new Bug(Integer.parseInt(text1.getText()), text2.getText(), Integer.parseInt(text3.getText()), Integer.parseInt(text4.getText()), text5.getText(), qa.getCodigo()));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -1550,15 +1573,15 @@ public class Main extends javax.swing.JFrame {
 
     private void bt_comentar_qaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_comentar_qaMouseClicked
         String frase = txtComentario.getText();
-        txtRespuesta.append("QA: $["+frase+"]$" + "\n");
-        txtRespuesta_desarr.append("QA: $["+frase+"]$" + "\n");
+        txtRespuesta.append("QA: $[" + frase + "]$" + "\n");
+        txtRespuesta_desarr.append("QA: $[" + frase + "]$" + "\n");
         txtComentario.setText("");
     }//GEN-LAST:event_bt_comentar_qaMouseClicked
 
     private void bt_comentar_desarrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_comentar_desarrMouseClicked
         String frase = txtComentario_desarr.getText();
-        txtRespuesta.append("Administrador: #{"+frase+"}#" + "\n");
-        txtRespuesta_desarr.append("Administrador: #{"+frase+"}#" + "\n");
+        txtRespuesta.append("Administrador: #{" + frase + "}#" + "\n");
+        txtRespuesta_desarr.append("Administrador: #{" + frase + "}#" + "\n");
         txtComentario_desarr.setText("");
     }//GEN-LAST:event_bt_comentar_desarrMouseClicked
 
@@ -1596,6 +1619,38 @@ public class Main extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jbt_Ver_BugsMouseClicked
+
+    private void jbt_Crear_ReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbt_Crear_ReporteMouseClicked
+        // TODO add your handling code here:
+        try {
+            Document documento = new Document();
+            FileOutputStream pdf = new FileOutputStream(qa.getCodigo() + ".pdf");
+            PdfWriter.getInstance(documento,pdf);
+            documento.open();
+            
+            Paragraph titulo=new Paragraph("Bus reportados por el Analista QA "+qa.getCodigo()+"\n\n"
+            ,FontFactory.getFont("arial",22,Font.BOLD,BaseColor.BLUE));
+            
+            documento.add(titulo);
+            
+            PdfPTable tabla=new PdfPTable(2);
+            tabla.addCell("Codigo");
+            tabla.addCell("Estado");
+            
+            for (int i = 0; i < bugs.size(); i++) {
+                if (bugs.get(i).getQa().getCodigo().equalsIgnoreCase(qa.getCodigo())) {
+                    tabla.addCell(""+bugs.get(i).getCodigo());
+                    tabla.addCell(bugs.get(i).getEstado());
+                }
+            }
+            documento.add(tabla);
+            documento.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DocumentException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbt_Crear_ReporteMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1678,6 +1733,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JButton jb_comentarios_desarr;
+    private javax.swing.JButton jbt_Crear_Reporte;
     private javax.swing.JButton jbt_Crear_Usuario;
     private javax.swing.JButton jbt_Ver_Bugs;
     private javax.swing.JDialog jd_Administradores;
@@ -1738,6 +1794,7 @@ public class Main extends javax.swing.JFrame {
     static ArrayList<Desarollador> desarolladores = new ArrayList();
     static ArrayList<Bug> bugs = new ArrayList();
     static ArrayList<Proyecto_Software> softwares = new ArrayList();
+    static Analista_QA qa = new Analista_QA();
 
     public static void agregar_pre() {
         users.add(new Usuario("administrador", "administrador@gmail.com", "123"));

@@ -13,6 +13,7 @@ import java.util.ArrayList;
  * @author HP
  */
 public class Bug {
+    String QA;
     int codigo;
     String descripcion;
     int CP_Software;
@@ -21,13 +22,15 @@ public class Bug {
     Date F_Inicio;
     Date F_Finalizado;
     ArrayList <String> comentarios =new ArrayList();
+    Analista_QA qa;
 
-    public Bug(int codigo, String descripcion, int CP_Software, int urgencia, String estado) {
+    public Bug(int codigo, String descripcion, int CP_Software, int urgencia, String estado,String QA) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.CP_Software = CP_Software;
         this.urgencia = urgencia;
         this.estado = estado;
+        this.QA=QA;
     }
 
     public int getCodigo() {
@@ -85,6 +88,13 @@ public class Bug {
     public void setF_Finalizado(Date F_Finalizado) {
         this.F_Finalizado = F_Finalizado;
     }
-    
+
+    public Analista_QA getQa() {
+        return qa;
+    }
+
+    public void setQa(Analista_QA qa) {
+        this.qa = qa;
+    }
     
 }
