@@ -96,6 +96,7 @@ public class Main extends javax.swing.JFrame {
         bt_Modificar_Desarollador = new javax.swing.JButton();
         bt_Cerrar_Ver_Desarrollador = new javax.swing.JButton();
         bt_Borrar_Desarollador = new javax.swing.JButton();
+        jb_comentarios_desarr = new javax.swing.JButton();
         BugFrame = new javax.swing.JFrame();
         jLabel1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -121,10 +122,25 @@ public class Main extends javax.swing.JFrame {
         jt_Projectos_Software = new javax.swing.JTable();
         jd_QA = new javax.swing.JDialog();
         bt_Bug_QA = new javax.swing.JButton();
+        comentarios_qa = new javax.swing.JButton();
         jd_Desarollador = new javax.swing.JDialog();
         bt_Ver_Proyectos_Desarollador = new javax.swing.JButton();
         bt_Bugs_Finalizados = new javax.swing.JButton();
         bt_Asignar_Fecha_Bug = new javax.swing.JButton();
+        jd_comentarios_qa = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
+        txtComentario = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtRespuesta = new javax.swing.JTextArea();
+        bt_comentar_qa = new javax.swing.JButton();
+        jd_comentarios_desarr = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
+        txtComentario_desarr = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtRespuesta_desarr = new javax.swing.JTextArea();
+        bt_comentar_desarr = new javax.swing.JButton();
         jtf_Roll = new javax.swing.JTextField();
         bt_Login = new javax.swing.JButton();
         jpf_Contraseña = new javax.swing.JPasswordField();
@@ -442,6 +458,13 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jb_comentarios_desarr.setText("Comentarios");
+        jb_comentarios_desarr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_comentarios_desarrMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jd_Ver_DesarolladorLayout = new javax.swing.GroupLayout(jd_Ver_Desarollador.getContentPane());
         jd_Ver_Desarollador.getContentPane().setLayout(jd_Ver_DesarolladorLayout);
         jd_Ver_DesarolladorLayout.setHorizontalGroup(
@@ -449,17 +472,23 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jd_Ver_DesarolladorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
                 .addGroup(jd_Ver_DesarolladorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bt_Borrar_Desarollador)
-                    .addComponent(bt_Modificar_Desarollador)
-                    .addComponent(bt_Cerrar_Ver_Desarrollador))
-                .addContainerGap(83, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_Ver_DesarolladorLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bt_Cerrar_Ver_Desarrollador)
+                        .addContainerGap())
+                    .addGroup(jd_Ver_DesarolladorLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(jd_Ver_DesarolladorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(bt_Borrar_Desarollador, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bt_Modificar_Desarollador, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jb_comentarios_desarr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(93, Short.MAX_VALUE))))
         );
         jd_Ver_DesarolladorLayout.setVerticalGroup(
             jd_Ver_DesarolladorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_Ver_DesarolladorLayout.createSequentialGroup()
-                .addGroup(jd_Ver_DesarolladorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jd_Ver_DesarolladorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jd_Ver_DesarolladorLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -468,7 +497,9 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(bt_Modificar_Desarollador)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bt_Borrar_Desarollador)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jb_comentarios_desarr)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(bt_Cerrar_Ver_Desarrollador)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -650,25 +681,34 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        comentarios_qa.setText("Comentarios");
+        comentarios_qa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                comentarios_qaMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jd_QALayout = new javax.swing.GroupLayout(jd_QA.getContentPane());
         jd_QA.getContentPane().setLayout(jd_QALayout);
         jd_QALayout.setHorizontalGroup(
             jd_QALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-            .addGroup(jd_QALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jd_QALayout.createSequentialGroup()
-                    .addGap(173, 173, 173)
-                    .addComponent(bt_Bug_QA)
-                    .addContainerGap(174, Short.MAX_VALUE)))
+            .addGroup(jd_QALayout.createSequentialGroup()
+                .addGap(168, 168, 168)
+                .addGroup(jd_QALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comentarios_qa)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_QALayout.createSequentialGroup()
+                        .addComponent(bt_Bug_QA)
+                        .addGap(16, 16, 16)))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
         jd_QALayout.setVerticalGroup(
             jd_QALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-            .addGroup(jd_QALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jd_QALayout.createSequentialGroup()
-                    .addGap(137, 137, 137)
-                    .addComponent(bt_Bug_QA)
-                    .addContainerGap(138, Short.MAX_VALUE)))
+            .addGroup(jd_QALayout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(bt_Bug_QA)
+                .addGap(34, 34, 34)
+                .addComponent(comentarios_qa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         bt_Ver_Proyectos_Desarollador.setText("Ver Proyectos");
@@ -718,6 +758,114 @@ public class Main extends javax.swing.JFrame {
                 .addGap(8, 8, 8)
                 .addComponent(bt_Bugs_Finalizados)
                 .addGap(62, 62, 62))
+        );
+
+        jLabel2.setText("Ingrese comentario:");
+
+        txtRespuesta.setColumns(20);
+        txtRespuesta.setRows(5);
+        jScrollPane3.setViewportView(txtRespuesta);
+
+        bt_comentar_qa.setText("Comentar");
+        bt_comentar_qa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_comentar_qaMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane3)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtComentario, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(bt_comentar_qa, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtComentario)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(bt_comentar_qa, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jd_comentarios_qaLayout = new javax.swing.GroupLayout(jd_comentarios_qa.getContentPane());
+        jd_comentarios_qa.getContentPane().setLayout(jd_comentarios_qaLayout);
+        jd_comentarios_qaLayout.setHorizontalGroup(
+            jd_comentarios_qaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jd_comentarios_qaLayout.setVerticalGroup(
+            jd_comentarios_qaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jLabel3.setText("Ingrese comentario:");
+
+        txtRespuesta_desarr.setColumns(20);
+        txtRespuesta_desarr.setRows(5);
+        jScrollPane4.setViewportView(txtRespuesta_desarr);
+
+        bt_comentar_desarr.setText("Comentar");
+        bt_comentar_desarr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_comentar_desarrMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane4)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtComentario_desarr, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(bt_comentar_desarr, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtComentario_desarr)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(bt_comentar_desarr, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jd_comentarios_desarrLayout = new javax.swing.GroupLayout(jd_comentarios_desarr.getContentPane());
+        jd_comentarios_desarr.getContentPane().setLayout(jd_comentarios_desarrLayout);
+        jd_comentarios_desarrLayout.setHorizontalGroup(
+            jd_comentarios_desarrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jd_comentarios_desarrLayout.setVerticalGroup(
+            jd_comentarios_desarrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1354,6 +1502,33 @@ public class Main extends javax.swing.JFrame {
         users.add(new Usuario(rol, usario, contraseña));
     }//GEN-LAST:event_jbt_Crear_UsuarioMouseClicked
 
+    private void comentarios_qaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comentarios_qaMouseClicked
+        // TODO add your handling code here:jd_CRUD_Software.setLocationRelativeTo(this);
+        jd_comentarios_qa.setLocationRelativeTo(this);
+        jd_comentarios_qa.setVisible(true);
+        jd_comentarios_qa.pack();
+    }//GEN-LAST:event_comentarios_qaMouseClicked
+
+    private void bt_comentar_qaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_comentar_qaMouseClicked
+        String frase = txtComentario.getText();
+        txtRespuesta.append("QA: $["+frase+"]$" + "\n");
+        txtRespuesta_desarr.append("QA: $["+frase+"]$" + "\n");
+        txtComentario.setText("");
+    }//GEN-LAST:event_bt_comentar_qaMouseClicked
+
+    private void bt_comentar_desarrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_comentar_desarrMouseClicked
+        String frase = txtComentario_desarr.getText();
+        txtRespuesta.append("Administrador: #{"+frase+"}#" + "\n");
+        txtRespuesta_desarr.append("Administrador: #{"+frase+"}#" + "\n");
+        txtComentario_desarr.setText("");
+    }//GEN-LAST:event_bt_comentar_desarrMouseClicked
+
+    private void jb_comentarios_desarrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_comentarios_desarrMouseClicked
+        jd_comentarios_desarr.setLocationRelativeTo(this);
+        jd_comentarios_desarr.setVisible(true);
+        jd_comentarios_desarr.pack();
+    }//GEN-LAST:event_jb_comentarios_desarrMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1414,6 +1589,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton bt_Ver_Desarolladores;
     private javax.swing.JButton bt_Ver_Proyectos;
     private javax.swing.JButton bt_Ver_Proyectos_Desarollador;
+    private javax.swing.JButton bt_comentar_desarr;
+    private javax.swing.JButton bt_comentar_qa;
+    private javax.swing.JButton comentarios_qa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -1422,8 +1600,15 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JButton jb_comentarios_desarr;
     private javax.swing.JButton jbt_Crear_Usuario;
     private javax.swing.JDialog jd_Administradores;
     private javax.swing.JDialog jd_CRUD_Desarollador;
@@ -1432,6 +1617,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JDialog jd_QA;
     private javax.swing.JDialog jd_Ver_Desarollador;
     private javax.swing.JDialog jd_Ver_Projectos;
+    private javax.swing.JDialog jd_comentarios_desarr;
+    private javax.swing.JDialog jd_comentarios_qa;
     private javax.swing.JLabel jl_Codigo_Desarollador;
     private javax.swing.JLabel jl_Codigo_Proyecto;
     private javax.swing.JLabel jl_Contraseña;
@@ -1469,6 +1656,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField text5;
     private javax.swing.JTextField text6;
     private javax.swing.JTextField text7;
+    private javax.swing.JTextField txtComentario;
+    private javax.swing.JTextField txtComentario_desarr;
+    private javax.swing.JTextArea txtRespuesta;
+    private javax.swing.JTextArea txtRespuesta_desarr;
     // End of variables declaration//GEN-END:variables
     static ArrayList<Usuario> users = new ArrayList();
     String control;
