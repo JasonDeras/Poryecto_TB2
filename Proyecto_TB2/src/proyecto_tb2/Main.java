@@ -14,6 +14,7 @@ import com.itextpdf.text.pdf.PdfDocument;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -54,7 +56,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH / 2);
-
+        agregar_pre();
     }
 
     /**
@@ -1031,7 +1033,15 @@ public class Main extends javax.swing.JFrame {
             new String [] {
                 "Rol", "Correo"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane6.setViewportView(jt_Ver_Usuarios);
 
         javax.swing.GroupLayout jd_Ver_UsuariosLayout = new javax.swing.GroupLayout(jd_Ver_Usuarios.getContentPane());
@@ -1799,8 +1809,8 @@ public class Main extends javax.swing.JFrame {
         try {
 
             DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("ROL");
-            model.addColumn("CORREO");
+            model.addColumn("Rol");
+            model.addColumn("Correo");
             String sql = "SELECT ROL,CORREO FROM USUARIO";
 
             con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
@@ -1813,7 +1823,7 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "success");
 
             jt_Ver_Usuarios.setModel(model);
-        } catch (Exception ex) {
+        } catch (HeadlessException | SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }//GEN-LAST:event_jbt_Ver_UsuariosMouseClicked
@@ -1976,12 +1986,15 @@ public class Main extends javax.swing.JFrame {
 
     public static void agregar_pre() {
         try {
-            String sql = "SELECT CORREO,CONTRASEÑA,ROL FROM USUARIO ";
+            String sql = "SELECT ROL,CORREO,CONTRASEÑA FROM USUARIO ";
             con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
             rs = st.executeQuery(sql);
             while (rs.next()) {
                 users.add(new Usuario(rs.getString("ROL"), rs.getString("CORREO"), rs.getString("CONTRASEÑA")));
             }
+            users.add(new Usuario("administrador", "administrador@gmail.com", "456"));
+            users.add(new Usuario("qa", "qa@gmail.com", "123"));
+            users.add(new Usuario("desarollador", "desarollador@gmail.com", "789"));
             JOptionPane.showMessageDialog(null, "success");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
