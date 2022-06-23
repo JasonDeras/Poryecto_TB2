@@ -31,11 +31,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-//import org.jfree.chart.ChartFactory;
-//import org.jfree.chart.ChartFrame;
-//import org.jfree.chart.JFreeChart;
-//import org.jfree.chart.plot.PiePlot;
-//import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -1377,7 +1377,7 @@ public class Main extends javax.swing.JFrame {
             int asignados = 0;
             int nuevos = 0;
             int finalizados = 0;
-
+            int desarollos = 0;
             String sql = "SELECT ESTADO FROM BUG";
 
             con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
@@ -1391,12 +1391,14 @@ public class Main extends javax.swing.JFrame {
                     asignados++;
                 } else if (rs.getString("ESTADO").equalsIgnoreCase("finalizado")) {
                     finalizados++;
+                } else {
+                    desarollos++;
                 }
             }
             datos.setValue("Nuevos", nuevos);
             datos.setValue("Asignados", asignados);
             datos.setValue("Finalizados", finalizados);
-
+            datos.setValue("En Desarollor", desarollos);
             JFreeChart chart = ChartFactory.createPieChart("Bugs", datos, true, true, true);
             PiePlot p = (PiePlot) chart.getPlot();
             ChartFrame frame = new ChartFrame("Grafico Circular de bugs", chart);
@@ -1625,21 +1627,21 @@ public class Main extends javax.swing.JFrame {
         try {
             Document documento = new Document();
             FileOutputStream pdf = new FileOutputStream(qa.getCodigo() + ".pdf");
-            PdfWriter.getInstance(documento,pdf);
+            PdfWriter.getInstance(documento, pdf);
             documento.open();
-            
-            Paragraph titulo=new Paragraph("Bus reportados por el Analista QA "+qa.getCodigo()+"\n\n"
-            ,FontFactory.getFont("arial",22,Font.BOLD,BaseColor.BLUE));
-            
+
+            Paragraph titulo = new Paragraph("Bus reportados por el Analista QA " + qa.getCodigo() + "\n\n",
+                     FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.BLUE));
+
             documento.add(titulo);
-            
-            PdfPTable tabla=new PdfPTable(2);
+
+            PdfPTable tabla = new PdfPTable(2);
             tabla.addCell("Codigo");
             tabla.addCell("Estado");
-            
+
             for (int i = 0; i < bugs.size(); i++) {
                 if (bugs.get(i).getQa().getCodigo().equalsIgnoreCase(qa.getCodigo())) {
-                    tabla.addCell(""+bugs.get(i).getCodigo());
+                    tabla.addCell("" + bugs.get(i).getCodigo());
                     tabla.addCell(bugs.get(i).getEstado());
                 }
             }
