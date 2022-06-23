@@ -1976,7 +1976,7 @@ public class Main extends javax.swing.JFrame {
 
     public static void agregar_pre() {
         try {
-            String sql = "SELECT CORREO,USUARIO,CONTRASEÑA FORM USUARIO ";
+            String sql = "SELECT CORREO,CONTRASEÑA,ROL FROM USUARIO ";
             con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
             rs = st.executeQuery(sql);
             while (rs.next()) {
