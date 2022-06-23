@@ -1779,7 +1779,7 @@ public class Main extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "success");
 
-            users.add(new Usuario(jtf_correo.getText(), jtf_contraseña.getText(), jtf_rol.getText()));
+            users.add(new Usuario(jtf_rol.getText(), jtf_correo.getText(), jtf_contraseña.getText()));
 
             jtf_correo.setText("");
             jtf_contraseña.setText("");
