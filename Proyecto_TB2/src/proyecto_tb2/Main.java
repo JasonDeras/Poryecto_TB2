@@ -123,6 +123,7 @@ public class Main extends javax.swing.JFrame {
         jd_QA = new javax.swing.JDialog();
         bt_Bug_QA = new javax.swing.JButton();
         comentarios_qa = new javax.swing.JButton();
+        jbt_Ver_Bugs = new javax.swing.JButton();
         jd_Desarollador = new javax.swing.JDialog();
         bt_Ver_Proyectos_Desarollador = new javax.swing.JButton();
         bt_Bugs_Finalizados = new javax.swing.JButton();
@@ -141,6 +142,9 @@ public class Main extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         txtRespuesta_desarr = new javax.swing.JTextArea();
         bt_comentar_desarr = new javax.swing.JButton();
+        jd_Ver_Bugs = new javax.swing.JDialog();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jt_Bugs = new javax.swing.JTable();
         jtf_Roll = new javax.swing.JTextField();
         bt_Login = new javax.swing.JButton();
         jpf_Contraseña = new javax.swing.JPasswordField();
@@ -688,6 +692,13 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jbt_Ver_Bugs.setText("Ver Bugs");
+        jbt_Ver_Bugs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbt_Ver_BugsMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jd_QALayout = new javax.swing.GroupLayout(jd_QA.getContentPane());
         jd_QA.getContentPane().setLayout(jd_QALayout);
         jd_QALayout.setHorizontalGroup(
@@ -695,10 +706,12 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jd_QALayout.createSequentialGroup()
                 .addGap(168, 168, 168)
                 .addGroup(jd_QALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(comentarios_qa)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_QALayout.createSequentialGroup()
-                        .addComponent(bt_Bug_QA)
-                        .addGap(16, 16, 16)))
+                    .addComponent(jbt_Ver_Bugs)
+                    .addGroup(jd_QALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(comentarios_qa)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_QALayout.createSequentialGroup()
+                            .addComponent(bt_Bug_QA)
+                            .addGap(16, 16, 16))))
                 .addContainerGap(153, Short.MAX_VALUE))
         );
         jd_QALayout.setVerticalGroup(
@@ -708,7 +721,9 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(bt_Bug_QA)
                 .addGap(34, 34, 34)
                 .addComponent(comentarios_qa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(jbt_Ver_Bugs)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         bt_Ver_Proyectos_Desarollador.setText("Ver Proyectos");
@@ -866,6 +881,40 @@ public class Main extends javax.swing.JFrame {
         jd_comentarios_desarrLayout.setVerticalGroup(
             jd_comentarios_desarrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jt_Bugs.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo", "Estado"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(jt_Bugs);
+
+        javax.swing.GroupLayout jd_Ver_BugsLayout = new javax.swing.GroupLayout(jd_Ver_Bugs.getContentPane());
+        jd_Ver_Bugs.getContentPane().setLayout(jd_Ver_BugsLayout);
+        jd_Ver_BugsLayout.setHorizontalGroup(
+            jd_Ver_BugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_Ver_BugsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+        jd_Ver_BugsLayout.setVerticalGroup(
+            jd_Ver_BugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_Ver_BugsLayout.createSequentialGroup()
+                .addGap(0, 25, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1190,16 +1239,6 @@ public class Main extends javax.swing.JFrame {
     private void bt_Modificar_ProyectoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_Modificar_ProyectoMouseClicked
         // TODO add your handling code here:
         try {
-            String sql = "INSERT INTO PROYECTO_SOFTWARE (CODIGO_PROYECTO, NOMBRE_PROYECTO, FECHAINICIO, FECHAFIN, EQUIPO_DESARR, LISTA_BUGS, LISTA_BUGS_FINALIZADOS)VALUES (?,?,?,?,?,?,?)";
-
-            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
-            pst = con.prepareStatement(sql);
-            pst.executeUpdate();
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-        try {
             String input;
             input = JOptionPane.showInputDialog(jd_Ver_Projectos, "1. Cambiar Nombre\n2. Fecha Inicio\n3. Fecha Finalizacion\n4. Agregar Desarollador"
                     + "\n5. Agregar Bug\n Ingrese una opcion: ");
@@ -1470,7 +1509,7 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         jd_Ver_Projectos.setLocationRelativeTo(this);
         jd_Ver_Projectos.setVisible(true);
-        jd_Ver_Projectos.setSize(250, 250);
+        jd_Ver_Projectos.pack();
 
         try {
             DefaultTableModel model = new DefaultTableModel();
@@ -1528,6 +1567,35 @@ public class Main extends javax.swing.JFrame {
         jd_comentarios_desarr.setVisible(true);
         jd_comentarios_desarr.pack();
     }//GEN-LAST:event_jb_comentarios_desarrMouseClicked
+
+    private void jbt_Ver_BugsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbt_Ver_BugsMouseClicked
+        // TODO add your handling code here:
+        jd_Ver_Bugs.setLocationRelativeTo(this);
+        jd_Ver_Bugs.setVisible(true);
+        jd_Ver_Bugs.pack();
+        jd_Ver_Bugs.setTitle("Ver Bugs");
+        try {
+
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Codigo");
+            model.addColumn("Estado");
+            String sql = "SELECT CODIGO,ESTADO FROM BUG";
+
+            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "rick", "workspace@9034");
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                model.addRow(new Object[]{"" + rs.getString("CODIGO"), "" + rs.getString("ESTADO")});
+            }
+            JOptionPane.showMessageDialog(null, "success");
+
+            jt_Bugs.setModel(model);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+
+    }//GEN-LAST:event_jbt_Ver_BugsMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1608,13 +1676,16 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JButton jb_comentarios_desarr;
     private javax.swing.JButton jbt_Crear_Usuario;
+    private javax.swing.JButton jbt_Ver_Bugs;
     private javax.swing.JDialog jd_Administradores;
     private javax.swing.JDialog jd_CRUD_Desarollador;
     private javax.swing.JDialog jd_CRUD_Software;
     private javax.swing.JDialog jd_Desarollador;
     private javax.swing.JDialog jd_QA;
+    private javax.swing.JDialog jd_Ver_Bugs;
     private javax.swing.JDialog jd_Ver_Desarollador;
     private javax.swing.JDialog jd_Ver_Projectos;
     private javax.swing.JDialog jd_comentarios_desarr;
@@ -1634,6 +1705,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jl_Tecnologia_Domina;
     private javax.swing.JLabel jl_Usuario;
     private javax.swing.JPasswordField jpf_Contraseña;
+    private javax.swing.JTable jt_Bugs;
     private javax.swing.JTable jt_Desarolladores;
     private javax.swing.JTable jt_Projectos_Software;
     private javax.swing.JTextField jtf_Codigo_Desarollador;
